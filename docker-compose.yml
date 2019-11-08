@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  canteen-api:
+    image: foodies/foody-canteen-api
+    build:
+      context: .
+      dockerfile: Foodies.Foody.Canteen.Application/Dockerfile
