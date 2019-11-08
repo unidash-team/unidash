@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Foodies.Foody.Canteen.Core.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,8 +28,15 @@ namespace Foodies.Foody.Canteen.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddOpenApiDocument();
             services.AddMediatR(typeof(Startup));
+
+            services.AddSingleton<ICanteenService, OpenMensaCanteenService>(provider => 
+                new OpenMensaCanteenService(new OpenMensaCanteenConfiguration
+                    {
+                        CanteenId = "33"
+                    }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

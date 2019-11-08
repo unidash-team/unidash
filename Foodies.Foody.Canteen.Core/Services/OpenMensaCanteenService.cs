@@ -31,11 +31,13 @@ namespace Foodies.Foody.Canteen.Core.Services
 
         public async Task<IEnumerable<Meal>> GetMealsAsync(DateTime date)
         {
-            return await _client.GetAsync<List<Meal>>(
-                new RestRequest($"/canteens/{_configuration.CanteenId}/days/" + 
-                                $"{FormatDateTime(date)}/meals", Method.GET));
+            var request = new RestRequest("canteens/{id}/days/{date}/meals", Method.GET)
+                .AddUrlSegment("id", _configuration.CanteenId)
+                .AddUrlSegment("date", FormatDateTime(date));
+            
+            return await _client.GetAsync<List<Meal>>(request);
         }
 
-        public string FormatDateTime(DateTime date) => date.ToString("YYYY-MM-DD");
+        public string FormatDateTime(DateTime date) => date.ToString("yyyy-MM-dd");
     }
 }
