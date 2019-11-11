@@ -11,5 +11,7 @@ namespace Foodies.Foody.Canteen.Core.Services
         Task<IEnumerable<Meal>> GetMealsAsync();
 
         Task<IEnumerable<Meal>> GetMealsAsync(DateTime date);
+
+        Task<Dictionary<DateTime, IEnumerable<Meal>>> GetMealsOfWeekAsync();
     }
 }

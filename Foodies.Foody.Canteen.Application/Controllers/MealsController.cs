@@ -26,6 +26,14 @@ namespace Foodies.Foody.Canteen.Application.Controllers
         [HttpGet]
         [ResponseCache(Duration = 1)]
         [ProducesResponseType(typeof(IList<Meal>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get() => Ok(await _canteenService.GetMealsAsync());
+        public async Task<IActionResult> Get() 
+            => Ok(await _canteenService.GetMealsAsync());
+
+        // TODO: Normalize output from dictionary to list
+        [HttpGet("week")]
+        [ResponseCache(Duration = 1)]
+        [ProducesResponseType(typeof(Dictionary<DateTime, IList<Meal>>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetWeek() 
+            => Ok(await _canteenService.GetMealsOfWeekAsync());
     }
 }
