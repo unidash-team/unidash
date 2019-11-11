@@ -38,20 +38,20 @@ namespace Foodies.Foody.Canteen.Core.Services
             return await _client.GetAsync<List<Meal>>(request);
         }
 
-        public async Task<Dictionary<DateTime, IEnumerable<Meal>>> GetMealsOfWeekAsync()
+        public async Task<IEnumerable<MealsDateTuple>> GetMealsOfWeekAsync()
         {
-            var dictionary = new Dictionary<DateTime, IEnumerable<Meal>>();
+            var list = new List<MealsDateTuple>();
             var date = DateTime.Today;
 
             while (date.DayOfWeek <= DayOfWeek.Friday)
             {
                 var meals = await GetMealsAsync(date);
-                dictionary.Add(date, meals);
+                list.Add(new MealsDateTuple(date, meals));
 
                 date = date.AddDays(1);
             }
 
-            return dictionary;
+            return list;
         }
 
         public string FormatDateTime(DateTime date) => date.ToString("yyyy-MM-dd");

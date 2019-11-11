@@ -31,8 +31,8 @@ namespace Foodies.Foody.Canteen.Application.Controllers
 
         // TODO: Normalize output from dictionary to list
         [HttpGet("week")]
-        [ResponseCache(Duration = 1)]
-        [ProducesResponseType(typeof(Dictionary<DateTime, IList<Meal>>), StatusCodes.Status200OK)]
+        //[ResponseCache(Duration = 1)]
+        [ProducesResponseType(typeof(IEnumerable<MealsDateTuple>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetWeek() 
             => Ok(await _canteenService.GetMealsOfWeekAsync());
     }
