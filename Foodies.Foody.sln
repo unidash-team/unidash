@@ -11,7 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodies.Foody.Canteen.Tests
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{83641D31-A1CF-496F-B4A9-83ACC7DF1359}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodies.Foody.Auth.Application", "Foodies.Foody.Auth.Application\Foodies.Foody.Auth.Application.csproj", "{E4E39D5E-F594-487D-BEF9-B88330212F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodies.Foody.Auth.Application", "Foodies.Foody.Auth.Application\Foodies.Foody.Auth.Application.csproj", "{E4E39D5E-F594-487D-BEF9-B88330212F5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{6A01727A-798B-4743-9F59-1B8E72109EA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Canteen", "Canteen", "{96352A29-A0A5-4840-91CC-B6D2616D04EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TimeTable", "TimeTable", "{928F652A-31E4-4AC4-9B58-E188ACEA570E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodies.Foody.TimeTable.Application", "Foodies.Foody.TimeTable.Application\Foodies.Foody.TimeTable.Application.csproj", "{55B48700-BBE3-47EF-99F1-CDE335C76717}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +47,20 @@ Global
 		{E4E39D5E-F594-487D-BEF9-B88330212F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4E39D5E-F594-487D-BEF9-B88330212F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4E39D5E-F594-487D-BEF9-B88330212F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B48700-BBE3-47EF-99F1-CDE335C76717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B48700-BBE3-47EF-99F1-CDE335C76717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B48700-BBE3-47EF-99F1-CDE335C76717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B48700-BBE3-47EF-99F1-CDE335C76717}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1F7B84D-6956-417A-84B6-BF465EF475BD} = {96352A29-A0A5-4840-91CC-B6D2616D04EE}
+		{E8DD3AB9-F9D6-46BF-B985-D82FBDC559FF} = {96352A29-A0A5-4840-91CC-B6D2616D04EE}
+		{E184D49D-E3C8-4774-BBEC-146AE2B5F12B} = {96352A29-A0A5-4840-91CC-B6D2616D04EE}
+		{E4E39D5E-F594-487D-BEF9-B88330212F5F} = {6A01727A-798B-4743-9F59-1B8E72109EA6}
+		{55B48700-BBE3-47EF-99F1-CDE335C76717} = {928F652A-31E4-4AC4-9B58-E188ACEA570E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76B1D52B-E99C-443C-BD37-34C4D9A5CE5C}
