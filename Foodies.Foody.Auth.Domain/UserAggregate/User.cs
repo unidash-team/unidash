@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Foodies.Foody.Core.Domain;
 
-namespace Foodies.Foody.Auth.Application.Data
+namespace Foodies.Foody.Auth.Domain.UserAggregate
 {
     public class User : Entity
     {

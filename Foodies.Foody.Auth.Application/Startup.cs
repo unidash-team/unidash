@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNet.Security.OAuth.Discord;
+using AutoMapper;
+using Foodies.Foody.Auth.Commands;
+using Foodies.Foody.Core.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +43,12 @@ namespace Foodies.Foody.Auth.Application
                     options.SaveTokens = true;
                 })
                 .AddCookie("Bearer");
+
+            services.AddMediatR(typeof(CreateUserCommand).Assembly);
+            services.AddAutoMapper(typeof(CreateUserCommand).Assembly);
+
+            // TODO: Use production DB
+            services.AddSingleton(typeof(IEntityRepository<>), typeof(InMemoryEntityRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
