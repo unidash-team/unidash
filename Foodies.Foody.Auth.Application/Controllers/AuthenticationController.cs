@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AspNet.Security.OAuth.Discord;
 using Foodies.Foody.Auth.Commands;
 using Foodies.Foody.Auth.Domain.UserAggregate;
+using Foodies.Foody.Auth.Users.Requests;
 using Foodies.Foody.Core.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -24,17 +25,29 @@ namespace Foodies.Foody.Auth.Application.Controllers
     {
         private readonly IMediator _mediator;
 
-        public AuthenticationController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         public static Dictionary<string, string> ProviderMapping => new Dictionary<string, string>
         {
             { "discord", DiscordAuthenticationDefaults.AuthenticationScheme }
         };
 
-        [HttpGet("challenge/{provider}")]
+        public AuthenticationController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpGet("connect/challenge/{provider}")]
         [AllowAnonymous]
         public async Task Challenge(string provider)
         {
@@ -48,7 +61,7 @@ namespace Foodies.Foody.Auth.Application.Controllers
             });
         }
 
-        [HttpGet("finalize")]
+        [HttpGet("connect/finalize")]
         public async Task<IActionResult> Finalize()
         {
             // TODO: Finalize command
@@ -59,7 +72,7 @@ namespace Foodies.Foody.Auth.Application.Controllers
             var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var name = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
-            await _mediator.Send(new CreateUserCommand(id, name, null));
+            await _mediator.Send(new CreateUserCommand(id, name, null, null));
 
             return await Task.FromResult(Ok(new { User.Identity.AuthenticationType, id, name }));
         }

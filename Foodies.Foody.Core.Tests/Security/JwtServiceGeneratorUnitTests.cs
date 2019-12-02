@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Unicode;
-using System.Transactions;
+using FluentAssertions;
 using Foodies.Foody.Core.Security;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
-namespace Foodies.Foody.Core.Tests
+namespace Foodies.Foody.Core.Tests.Security
 {
-    public class JwtServiceGeneratorTests
+    public class JwtServiceGeneratorUnitTests
     {
         [Fact]
         public void Create_NewToken_CanGenerate()
         {
             // Arrange
             var service = CreateDefaultTokenService();
-            var userId = "12345";
+            const string userId = "12345";
 
             // Act
-            string jwt = service.WriteToken(new Dictionary<string, string> {{ "uid", userId }}, 
+            var jwt = service.WriteToken(new Dictionary<string, string> {{ "uid", userId }}, 
                 meta: new JwtTokenMeta {
                     ExpiresAt = DateTime.Now.AddDays(1),
                     Audience = "foody",
@@ -29,7 +27,7 @@ namespace Foodies.Foody.Core.Tests
                 });
 
             // Assert
-            Assert.NotEmpty(jwt);
+            jwt.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -37,12 +35,12 @@ namespace Foodies.Foody.Core.Tests
         {
             // Arrange
             var services = CreateDefaultTokenService();
-            var userId = "12345";
-            var audience = "foody";
-            var issuer = "foody";
+            const string userId = "12345";
+            const string audience = "foody";
+            const string issuer = "foody";
 
             // Act
-            string jwt = services.WriteToken(new Dictionary<string, string> {{"uid", userId}},
+            var jwt = services.WriteToken(new Dictionary<string, string> {{"uid", userId}},
                 new JwtTokenMeta
                 {
                     ExpiresAt = DateTime.Now.AddDays(1),
@@ -50,14 +48,14 @@ namespace Foodies.Foody.Core.Tests
                     Issuer = issuer
                 });
 
-            // Assert
-            var isValid = services.ValidateToken(jwt, new TokenValidationParameters 
+            var isValid = services.ValidateToken(jwt, new TokenValidationParameters
             {
                 ValidAudience = audience,
                 ValidIssuer = issuer
             });
 
-            Assert.True(isValid);
+            // Assert
+            isValid.Should().BeTrue();
         }
 
         [Fact]
@@ -80,13 +78,14 @@ namespace Foodies.Foody.Core.Tests
                     Issuer = issuer
                 });
 
-            // Assert
             var isValid = services.ValidateToken(jwt, new TokenValidationParameters
             {
-                ValidAudience = validateAudience, ValidIssuer = validateIssuer
+                ValidAudience = validateAudience,
+                ValidIssuer = validateIssuer
             });
 
-            Assert.False(isValid);
+            // Assert
+            isValid.Should().BeFalse();
         }
 
         [Fact]
@@ -113,13 +112,15 @@ namespace Foodies.Foody.Core.Tests
             });
 
             // Assert
-            Assert.Equal(userId, claims.Identity.Name);
+            claims.Identity.Name
+                .Should()
+                .Be(userId);
         }
 
         // Seed work
         private JwtTokenService CreateDefaultTokenService()
         {
-            var secret = "verysecuresecretindeed!123";
+            const string secret = "verysecuresecretindeed!123";
             return new JwtTokenService(signingKey: new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)));
         }
     }
