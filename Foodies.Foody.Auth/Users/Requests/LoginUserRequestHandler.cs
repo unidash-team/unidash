@@ -18,13 +18,15 @@ namespace Foodies.Foody.Auth.Users.Requests
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly JwtTokenService _jwtTokenService;
+        private readonly PasswordService _passwordService;
 
         public LoginUserRequestHandler(IMediator mediator, IMapper mapper,
-            JwtTokenService jwtTokenService)
+            JwtTokenService jwtTokenService, PasswordService passwordService)
         {
             _mediator = mediator;
             _mapper = mapper;
             _jwtTokenService = jwtTokenService;
+            _passwordService = passwordService;
         }
 
         public async Task<IActionResult> Handle(LoginUserRequest request, CancellationToken cancellationToken)
@@ -36,7 +38,7 @@ namespace Foodies.Foody.Auth.Users.Requests
                 return new NotFoundObjectResult("User not found");
 
             // TODO: By lord, use PasswordService and check hash
-            if (request.Password != userMatch.Password)
+            if (!_passwordService.Validate(request.Password, userMatch.PasswordSalt, userMatch.Password))
                 return new BadRequestObjectResult("Password does not match");
 
             // Return JWT token

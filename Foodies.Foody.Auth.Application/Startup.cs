@@ -56,6 +56,7 @@ namespace Foodies.Foody.Auth.Application
             // TODO: Use production DB
             services.AddSingleton(typeof(IEntityRepository<>), typeof(InMemoryEntityRepository<>));
 
+            services.AddSingleton<PasswordService>();
             services.AddSingleton<JwtTokenService>(provider =>
                 new JwtTokenService(
                     new SymmetricSecurityKey(

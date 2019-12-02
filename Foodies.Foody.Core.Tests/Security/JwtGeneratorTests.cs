@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Foodies.Foody.Core.Tests.Security
 {
-    public class JwtServiceGeneratorUnitTests
+    public class JwtGeneratorTests
     {
         [Fact]
         public void Create_NewToken_CanGenerate()
