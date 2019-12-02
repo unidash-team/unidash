@@ -13,11 +13,14 @@ namespace Foodies.Foody.Auth.Commands
 
         public string EmailAddress { get; private set; }
 
-        public CreateUserCommand(string id, string displayName, string emailAddress)
+        public string Password { get; private set; }
+
+        public CreateUserCommand(string id, string displayName, string emailAddress, string password)
         {
             Id = id;
             DisplayName = displayName;
             EmailAddress = emailAddress;
+            Password = password;
         }
     }
 }

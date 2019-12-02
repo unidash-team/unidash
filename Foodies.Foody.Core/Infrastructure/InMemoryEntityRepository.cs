@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Foodies.Foody.Core.Domain;
@@ -43,6 +44,9 @@ namespace Foodies.Foody.Core.Infrastructure
             return inlineEntity;
         }
 
-        public Task<IList<T>> FindAllAsync() => Task.FromResult(_list.ToList() as IList<T>);
+        public Task<IEnumerable<T>> FindAllAsync() => Task.FromResult(_list.ToList() as IEnumerable<T>);
+
+        public Task<IEnumerable<T>> FindAllByAsync(Expression<Func<T, bool>> match) =>
+            Task.FromResult(_list.Where(match.Compile()));
     }
 }

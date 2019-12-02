@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Foodies.Foody.Core.Domain;
@@ -16,6 +17,8 @@ namespace Foodies.Foody.Core.Infrastructure
 
         Task<T> GetOrCreateAsync(string id, T entity);
 
-        Task<IList<T>> FindAllAsync();
+        Task<IEnumerable<T>> FindAllAsync();
+
+        Task<IEnumerable<T>> FindAllByAsync(Expression<Func<T, bool>> match);
     }
 }
