@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MediatR;
+﻿using MediatR;
 
-namespace Foodies.Foody.Auth.Commands
+namespace Foodies.Foody.Auth.Users.Commands
 {
     public class CreateUserCommand : IRequest
     {

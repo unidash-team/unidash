@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using Foodies.Foody.Auth.Domain.UserAggregate;
+using Foodies.Foody.Auth.Users.Commands;
+using Foodies.Foody.Auth.Users.DataTransfer;
 
-namespace Foodies.Foody.Auth.Commands
+namespace Foodies.Foody.Auth.Users
 {
     public class MappingProfile : Profile
     {

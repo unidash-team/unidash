@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Foodies.Foody.Auth.Domain.UserAggregate;
+using Foodies.Foody.Auth.Users.Requests;
 using Foodies.Foody.Core.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,18 +15,17 @@ namespace Foodies.Foody.Auth.Application.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IEntityRepository<User> _userEntityRepository;
+        private readonly IMediator _mediator;
 
-        // TODO: Mediator pattern
-        public UsersController(IEntityRepository<User> userEntityRepository)
+        public UsersController(IMediator mediator)
         {
-            _userEntityRepository = userEntityRepository;
+            _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get() => Ok(await _userEntityRepository.FindAllAsync());
+        //[HttpGet]
+        //public async Task<IActionResult> Get() => Ok(await _userEntityRepository.FindAllAsync());
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(string id) => Ok(await _userEntityRepository.FindByIdAsync(id));
+        public async Task<IActionResult> GetById(string id) => await _mediator.Send(new GetUserRequest(id));
     }
 }

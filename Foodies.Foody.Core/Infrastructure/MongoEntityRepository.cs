@@ -5,11 +5,19 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Foodies.Foody.Core.Domain;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
 namespace Foodies.Foody.Core.Infrastructure
 {
+    public class MongoDbConnectionOptions
+    {
+        public string ConnectionString { get; set; }
+
+        public string DatabaseName { get; set; }
+    }
+
     public class MongoEntityRepository<T> : IEntityRepository<T> where T : Entity
     {
         public string ConnectionString { get; }
@@ -20,6 +28,10 @@ namespace Foodies.Foody.Core.Infrastructure
 
         private readonly IMongoDatabase _database;
 
+        public MongoEntityRepository(IOptions<MongoDbConnectionOptions> options) 
+            : this(options.Value.ConnectionString, options.Value.DatabaseName)
+        {
+        }
 
         public MongoEntityRepository(string connectionString, string databaseName)
         {
