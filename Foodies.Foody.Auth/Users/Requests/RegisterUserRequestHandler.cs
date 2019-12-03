@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Foodies.Foody.Auth.Commands;
+using Foodies.Foody.Auth.Users.Commands;
 using Foodies.Foody.Auth.Users.Queries;
 using Foodies.Foody.Core.Security;
 using MediatR;

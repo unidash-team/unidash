@@ -37,7 +37,7 @@ namespace Foodies.Foody.Auth.Users.Requests
             if (userMatch == null)
                 return new NotFoundObjectResult("User not found");
 
-            // TODO: By lord, use PasswordService and check hash
+            // Validate password
             if (!_passwordService.Validate(request.Password, userMatch.PasswordSalt, userMatch.Password))
                 return new BadRequestObjectResult("Password does not match");
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Mongo2Go;
 
 namespace Foodies.Foody.Core.Tests.SeedWork

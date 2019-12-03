@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Foodies.Foody.Auth.Domain.UserAggregate;
@@ -7,7 +6,7 @@ using Foodies.Foody.Core.Infrastructure;
 using Foodies.Foody.Core.Security;
 using MediatR;
 
-namespace Foodies.Foody.Auth.Commands
+namespace Foodies.Foody.Auth.Users.Commands
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
@@ -30,10 +29,9 @@ namespace Foodies.Foody.Auth.Commands
             user.PasswordSalt = _passwordService.GenerateRandomSaltAsBase64();
             user.Password = _passwordService.Hash(user.Password, user.PasswordSalt);
 
-            var entity = await _repository.GetOrCreateAsync(user.Id, user);
+            await _repository.GetOrCreateAsync(user.Id, user);
 
             return Unit.Value;
-            // return _mapper.Map<UserDto>(entity);
         }
     }
 }

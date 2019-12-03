@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AspNet.Security.OAuth.Discord;
 using AutoMapper;
-using Foodies.Foody.Auth.Commands;
+using Foodies.Foody.Auth.Users.Commands;
 using Foodies.Foody.Core.Infrastructure;
 using Foodies.Foody.Core.Security;
 using MediatR;
@@ -35,6 +35,13 @@ namespace Foodies.Foody.Auth.Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<MongoDbConnectionOptions>(options =>
+            {
+                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection") ?? "mongodb://mongodb";
+                options.DatabaseName = "foody_auth";
+            });
+
             services.AddControllers();
             services.AddOpenApiDocument();
 
@@ -53,8 +60,8 @@ namespace Foodies.Foody.Auth.Application
             services.AddMediatR(typeof(CreateUserCommand).Assembly);
             services.AddAutoMapper(typeof(CreateUserCommand).Assembly);
 
-            // TODO: Use production DB
-            services.AddSingleton(typeof(IEntityRepository<>), typeof(InMemoryEntityRepository<>));
+
+            services.AddSingleton(typeof(IEntityRepository<>), typeof(MongoEntityRepository<>));
 
             services.AddSingleton<PasswordService>();
             services.AddSingleton<JwtTokenService>(provider =>

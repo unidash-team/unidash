@@ -27,6 +27,7 @@ namespace Foodies.Foody.Core.Tests.Infrastructure
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
+    [Collection("Repository")]
     public class RepositoryTests : IClassFixture<Mongo2GoDatabaseFixture>
     {
         private readonly Mongo2GoDatabaseFixture _databaseFixture;
