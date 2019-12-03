@@ -35,6 +35,10 @@ namespace Foodies.Foody.Auth.Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var foodySecurityKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(Configuration.GetSection("Foody:Auth:SecurityKey").Value ??
+                                       "verysecureindeed!123"));
+
             services.AddOptions();
             services.Configure<MongoDbConnectionOptions>(options =>
             {
@@ -43,9 +47,14 @@ namespace Foodies.Foody.Auth.Application
             });
 
             services.AddControllers();
-            services.AddOpenApiDocument();
+            services.AddOpenApiDocument(settings => { settings.Title = "foody Auth API"; });
 
-            services.AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
+            services.AddHttpContextAccessor();
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddDiscord(options =>
                 {
                     options.ClientId = Configuration.GetSection("Foody:Auth:Providers:Discord:ClientId").Value;
@@ -55,7 +64,25 @@ namespace Foodies.Foody.Auth.Application
 
                     options.SaveTokens = true;
                 })
-                .AddCookie("Bearer");
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidAudience = "foody",
+                        ValidateAudience = true,
+
+                        ValidIssuer = "foody",
+                        ValidateIssuer = true,
+
+                        IssuerSigningKey = foodySecurityKey,
+                        ClockSkew = TimeSpan.FromMinutes(5)
+                    };
+
+                    options.IncludeErrorDetails = true;
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                })
+                .AddCookie();
 
             services.AddMediatR(typeof(CreateUserCommand).Assembly);
             services.AddAutoMapper(typeof(CreateUserCommand).Assembly);
@@ -64,11 +91,7 @@ namespace Foodies.Foody.Auth.Application
             services.AddSingleton(typeof(IEntityRepository<>), typeof(MongoEntityRepository<>));
 
             services.AddSingleton<PasswordService>();
-            services.AddSingleton<JwtTokenService>(provider =>
-                new JwtTokenService(
-                    new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(
-                            Configuration.GetSection("Foody:Auth:SecurityKey").Value ?? "verysecureindeed!123"))));
+            services.AddSingleton<JwtTokenService>(provider => new JwtTokenService(foodySecurityKey));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,9 +108,9 @@ namespace Foodies.Foody.Auth.Application
 
             app.UseOpenApi().UseSwaggerUi3();
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -43,8 +43,7 @@ namespace Foodies.Foody.Auth.Users.Requests
             // Create JWT
             var token = _jwtTokenService.WriteToken(new Dictionary<string, string>
             {
-                {ClaimTypes.NameIdentifier, id},
-                {ClaimTypes.Name, request.DisplayName},
+                {ClaimTypes.Name, id}
             }, new JwtTokenMeta
             {
                 Audience = "foody", Issuer = "foody", ExpiresAt = DateTime.Now.AddDays(7)

@@ -60,6 +60,11 @@ namespace Foodies.Foody.Core.Infrastructure
             await EntityCollection.DeleteOneAsync(e => e.Id == entity.Id);
         }
 
+        public async Task RemoveByIdAsync(string id)
+        {
+            await EntityCollection.DeleteOneAsync(e => e.Id == id);
+        }
+
         public async Task<T> GetOrCreateAsync(string id, T entity)
         {
             var match = await EntityCollection

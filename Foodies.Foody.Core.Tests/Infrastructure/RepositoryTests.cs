@@ -65,6 +65,22 @@ namespace Foodies.Foody.Core.Tests.Infrastructure
 
         [Theory]
         [ClassData(typeof(RepositoryTestData<string>))]
+        public async Task RemoveById_ExistingItem_Remove(IEntityRepository<GenericEntity<string>> repository)
+        {
+            // Act
+            var domainModel = new GenericEntity<string>("Cookies");
+            var entity = await repository.AddAsync(domainModel);
+            var id = entity.Id;
+
+            await repository.RemoveByIdAsync(id);
+            var match = await repository.FindByIdAsync(id);
+
+            // Assert
+            match.Should().BeNull("because we removed it by its ID");
+        }
+
+        [Theory]
+        [ClassData(typeof(RepositoryTestData<string>))]
         public async Task CreateWhenNotFound_SingleItem_ShouldCreate(IEntityRepository<GenericEntity<string>> repository)
         {
             // Act

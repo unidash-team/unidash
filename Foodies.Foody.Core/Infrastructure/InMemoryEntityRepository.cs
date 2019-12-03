@@ -30,6 +30,12 @@ namespace Foodies.Foody.Core.Infrastructure
             _list.Remove(e);
         }
 
+        public Task RemoveByIdAsync(string id)
+        {
+            _list.RemoveAll(e => e.Id == id);
+            return Task.CompletedTask;
+        }
+
         public async Task<T> GetOrCreateAsync(string id, T entity)
         {
             var inlineEntity = await FindByIdAsync(id);
