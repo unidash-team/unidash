@@ -84,6 +84,12 @@ namespace Foodies.Foody.Auth.Application
                 })
                 .AddCookie();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("GlobalAdmin", policy => policy.RequireRole("GlobalAdmin"));
+                options.AddPolicy("CourseAdmin", policy => policy.RequireRole("CourseAdmin"));
+            });
+
             services.AddMediatR(typeof(CreateUserCommand).Assembly);
             services.AddAutoMapper(typeof(CreateUserCommand).Assembly);
 

@@ -11,5 +11,7 @@ namespace Foodies.Foody.Auth.Domain.UserAggregate
         public string Password { get; set; }
 
         public string PasswordSalt { get; set; }
+
+        public string Role { get; set; }
     }
 }

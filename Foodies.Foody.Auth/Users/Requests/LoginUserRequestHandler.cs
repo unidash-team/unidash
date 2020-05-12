@@ -44,7 +44,8 @@ namespace Foodies.Foody.Auth.Users.Requests
             // Return JWT token
             var token = _jwtTokenService.WriteToken(new Dictionary<string, string>
             {
-                {ClaimTypes.Name, userMatch.Id}
+                {ClaimTypes.Name, userMatch.Id},
+                {ClaimTypes.Role, userMatch.Role }
             }, new JwtTokenMeta(DateTime.UtcNow.AddDays(30), "foody", "foody"));
 
             return new OkObjectResult(token);

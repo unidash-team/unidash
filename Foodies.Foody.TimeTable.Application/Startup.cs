@@ -40,6 +40,8 @@ namespace Foodies.Foody.TimeTable.Application
 
             app.UseRouting();
 
+            app.UseForwardedHeaders();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
