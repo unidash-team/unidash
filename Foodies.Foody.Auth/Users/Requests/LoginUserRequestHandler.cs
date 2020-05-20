@@ -45,10 +45,10 @@ namespace Foodies.Foody.Auth.Users.Requests
             var token = _jwtTokenService.WriteToken(new Dictionary<string, string>
             {
                 {ClaimTypes.Name, userMatch.Id},
-                {ClaimTypes.Role, userMatch.Role }
+                {ClaimTypes.Role, userMatch.Role ?? "Default" }
             }, new JwtTokenMeta(DateTime.UtcNow.AddDays(30), "foody", "foody"));
 
-            return new OkObjectResult(token);
+            return new OkObjectResult(new { token });
         }
     }
 }

@@ -25,9 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodies.Foody.Core", "Foodi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodies.Foody.Core.Tests", "Foodies.Foody.Core.Tests\Foodies.Foody.Core.Tests.csproj", "{755C3780-1D27-4377-88C5-D71C41E7B79E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodies.Foody.Auth.Domain", "Foodies.Foody.Auth.Domain\Foodies.Foody.Auth.Domain.csproj", "{5CC5A000-1FA4-4928-8454-70A065BD1095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodies.Foody.Auth.Domain", "Foodies.Foody.Auth.Domain\Foodies.Foody.Auth.Domain.csproj", "{5CC5A000-1FA4-4928-8454-70A065BD1095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodies.Foody.Auth", "Foodies.Foody.Auth\Foodies.Foody.Auth.csproj", "{0188F434-7C54-4D00-8A6D-D4049633C2CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodies.Foody.Auth", "Foodies.Foody.Auth\Foodies.Foody.Auth.csproj", "{0188F434-7C54-4D00-8A6D-D4049633C2CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chat", "Chat", "{6AE28CB0-2A40-4CCF-8753-D552FF5DFF4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodies.Foody.Chat.Application", "Foodies.Foody.Chat.Application\Foodies.Foody.Chat.Application.csproj", "{6199A431-6482-4159-82A8-280067AF3DF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,10 @@ Global
 		{0188F434-7C54-4D00-8A6D-D4049633C2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0188F434-7C54-4D00-8A6D-D4049633C2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0188F434-7C54-4D00-8A6D-D4049633C2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6199A431-6482-4159-82A8-280067AF3DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6199A431-6482-4159-82A8-280067AF3DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6199A431-6482-4159-82A8-280067AF3DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6199A431-6482-4159-82A8-280067AF3DF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +92,7 @@ Global
 		{755C3780-1D27-4377-88C5-D71C41E7B79E} = {A745DC47-5EF1-4812-84BE-A9C044C87DA5}
 		{5CC5A000-1FA4-4928-8454-70A065BD1095} = {6A01727A-798B-4743-9F59-1B8E72109EA6}
 		{0188F434-7C54-4D00-8A6D-D4049633C2CF} = {6A01727A-798B-4743-9F59-1B8E72109EA6}
+		{6199A431-6482-4159-82A8-280067AF3DF6} = {6AE28CB0-2A40-4CCF-8753-D552FF5DFF4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76B1D52B-E99C-443C-BD37-34C4D9A5CE5C}

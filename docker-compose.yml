@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   auth:
-    image: foodies/foody-auth
+    image: unidash/auth
     build:
       context: .
       dockerfile: Foodies.Foody.Auth.Application/Dockerfile
@@ -10,10 +10,16 @@ services:
       - mongodb
 
   canteen:
-    image: foodies/foody-canteen
+    image: unidash/canteen
     build:
       context: .
       dockerfile: Foodies.Foody.Canteen.Application/Dockerfile
+
+  chat:
+    image: unidash/chat
+    build:
+      context: .
+      dockerfile: Foodies.Foody.Chat.Application/Dockerfile
 
   mongodb:
     image: mongo
