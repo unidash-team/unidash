@@ -8,18 +8,18 @@
     <Node Id="(@5 @13 @27 Member=.ctor)" Category="CodeSchema_Method" Bounds="556.753577280645,572.717665211054,59.7866666666666,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" DelayedCrossGroupLinksState="Fetched" Label="User" />
     <Node Id="(@5 @13 @27 Member=DisplayName)" Category="CodeSchema_Property" Bounds="556.75358124499,600.677684303982,128.432394787382,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="DisplayName" />
     <Node Id="(@5 @13 @27 Member=EmailAddress)" Category="CodeSchema_Property" Bounds="556.75358124499,627.677684303982,129.285728120715,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="EmailAddress" />
-    <Node Id="@10" Category="CodeSchema_Namespace" Bounds="180.881591629196,100.883460446122,351.833432413737,315.831829727941" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="Foodies‎.Foody‎.Auth‎.Application‎.Controllers" />
-    <Node Id="@12" Category="CodeSchema_Namespace" Bounds="643.77386295081,102.874512737812,486.557130940755,313.8407" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="Foodies‎.Foody‎.Auth‎.Commands" />
-    <Node Id="@14" Category="CodeSchema_Namespace" Bounds="477.352174956882,506.715512737812,288.053333333333,171.960419092928" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="Foodies‎.Foody‎.Auth‎.Domain‎.UserAggregate" />
-    <Node Id="@15" Category="CodeSchema_Namespace" Bounds="1505.40244547947,275.230982990146,205.35,116.9919361152" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="Foodies‎.Foody‎.Core‎.Domain" UseManualLocation="True" />
-    <Node Id="@17" Category="CodeSchema_Namespace" Bounds="1240.46029445451,275.346765113501,234.76,229.800396337891" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="Foodies‎.Foody‎.Core‎.Infrastructure" />
+    <Node Id="@10" Category="CodeSchema_Namespace" Bounds="180.881591629196,100.883460446122,351.833432413737,315.831829727941" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎.Unidash‎.Auth‎.Application‎.Controllers" />
+    <Node Id="@12" Category="CodeSchema_Namespace" Bounds="643.77386295081,102.874512737812,486.557130940755,313.8407" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎.Unidash‎.Auth‎.Commands" />
+    <Node Id="@14" Category="CodeSchema_Namespace" Bounds="477.352174956882,506.715512737812,288.053333333333,171.960419092928" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎.Unidash‎.Auth‎.Domain‎.UserAggregate" />
+    <Node Id="@15" Category="CodeSchema_Namespace" Bounds="1505.40244547947,275.230982990146,205.35,116.9919361152" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎.Unidash‎.Core‎.Domain" UseManualLocation="True" />
+    <Node Id="@17" Category="CodeSchema_Namespace" Bounds="1240.46029445451,275.346765113501,234.76,229.800396337891" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="‎.Unidash‎.Core‎.Infrastructure" />
     <Node Id="@19" Category="CodeSchema_Interface" Bounds="1271.40529445451,315.346865113501,172.87,169.800196337891" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsGeneric="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="IEntityRepository‎&lt;T‎&gt;" LayoutSettings="List" />
-    <Node Id="@2" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:18" Bounds="1220.46139501557,235.226634198074,510.291066222944,289.949241663749" CodeSchemaProperty_StrongName="Foodies.Foody.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(a47b23b4-0218-41eb-babf-3316f9a38a86.OutputPath)" Group="Expanded" Label="Foodies.Foody.Core.dll">
+    <Node Id="@2" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:18" Bounds="1220.46139501557,235.226634198074,510.291066222944,289.949241663749" CodeSchemaProperty_StrongName="Unidash.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(a47b23b4-0218-41eb-babf-3316f9a38a86.OutputPath)" Group="Expanded" Label="Unidash.Core.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@21" Category="CodeSchema_Class" Bounds="200.881591629196,140.883560446122,311.833432413737,255.831629727941" CodeSchemaProperty_IsPublic="True" CommonLabel="AuthenticationController" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Icon="CodeSchema_Class" Label="AuthenticationController" SourceLocation="(Assembly=file:///C:/Projects/DHBW/Foodies.Foody/Foodies.Foody.Auth.Application/Controllers/AuthenticationController.cs StartLineNumber=22 StartCharacterOffset=17 EndLineNumber=22 EndCharacterOffset=41)" />
+    <Node Id="@21" Category="CodeSchema_Class" Bounds="200.881591629196,140.883560446122,311.833432413737,255.831629727941" CodeSchemaProperty_IsPublic="True" CommonLabel="AuthenticationController" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Icon="CodeSchema_Class" Label="AuthenticationController" SourceLocation="(Assembly=file:///C:/Projects/DHBW/Unidash/Unidash.Auth.Application/Controllers/AuthenticationController.cs StartLineNumber=22 StartCharacterOffset=17 EndLineNumber=22 EndCharacterOffset=41)" />
     <Node Id="@23" Category="CodeSchema_Class" Bounds="663.77386295081,200.314658526387,174.213333333333,138.960191609558" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="4" Group="Expanded" Label="CreateUserCommand" LayoutSettings="List" />
-    <Node Id="@25" Category="CodeSchema_Class" Bounds="867.98732405107,142.874612737812,242.343669840495,253.8405" CodeSchemaProperty_IsPublic="True" CommonLabel="CreateUserCommandHandler" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="4" Group="Expanded" Icon="CodeSchema_Class" Label="CreateUserCommandHandler" SourceLocation="(Assembly=file:///C:/Projects/DHBW/Foodies.Foody/Foodies.Foody.Auth/Users/Commands/CreateUserCommandHandler.cs StartLineNumber=9 StartCharacterOffset=17 EndLineNumber=9 EndCharacterOffset=41)" />
+    <Node Id="@25" Category="CodeSchema_Class" Bounds="867.98732405107,142.874612737812,242.343669840495,253.8405" CodeSchemaProperty_IsPublic="True" CommonLabel="CreateUserCommandHandler" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="4" Group="Expanded" Icon="CodeSchema_Class" Label="CreateUserCommandHandler" SourceLocation="(Assembly=file:///C:/Projects/DHBW/Unidash/Unidash.Auth/Users/Commands/CreateUserCommandHandler.cs StartLineNumber=9 StartCharacterOffset=17 EndLineNumber=9 EndCharacterOffset=41)" />
     <Node Id="@26" Category="CodeSchema_Class" Bounds="1562.66940899843,315.285340002149,90.7066666666669,57.0002" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="3" Group="Expanded" Label="Entity" LayoutSettings="List" />
     <Node Id="@28" Category="CodeSchema_Class" Bounds="550.735975581018,546.715612737812,141.28573208506,111.960219092928" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="3" Group="Expanded" Label="User" LayoutSettings="List" />
     <Node Id="@30" Category="CodeSchema_Method" Bounds="326.079292409226,350.757628700924,166.653333333333,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" DelayedCrossGroupLinksState="Fetched" Label="AuthenticationController" />
@@ -29,7 +29,7 @@
     <Node Id="@37" Category="CodeSchema_Method" Bounds="1291.29599920954,425.240153932042,133.1,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="GetOrCreateAsync" />
     <Node Id="@38" Category="CodeSchema_Method" Bounds="676.291464650436,226.317367263767,149.213333333333,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" DelayedCrossGroupLinksState="Fetched" Label="CreateUserCommand" />
     <Node Id="@39" Category="CodeSchema_Field" Bounds="948.830494598353,350.757621475193,82.98,25.96" CodeSchemaProperty_IsPrivate="True" DelayedCrossGroupLinksState="Fetched" Label="_mapper" />
-    <Node Id="@4" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:19" Bounds="623.77386295081,62.8744127378125,526.557130940755,373.8409" CodeSchemaProperty_StrongName="Foodies.Foody.Auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(0188f434-7c54-4d00-8a6d-d4049633c2cf.OutputPath)" Group="Expanded" Label="Foodies.Foody.Auth.dll">
+    <Node Id="@4" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:19" Bounds="623.77386295081,62.8744127378125,526.557130940755,373.8409" CodeSchemaProperty_StrongName="Unidash.Auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(0188f434-7c54-4d00-8a6d-d4049633c2cf.OutputPath)" Group="Expanded" Label="Unidash.Auth.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@40" Category="CodeSchema_Field" Bounds="284.225033376022,294.797592221649,89.9433333333333,25.96" CodeSchemaProperty_IsPrivate="True" DelayedCrossGroupLinksState="Fetched" Label="_mediator" />
@@ -40,10 +40,10 @@
     <Node Id="@45" Category="CodeSchema_Property" Bounds="676.291497682804,308.277358873325,68.709061454048,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Id" />
     <Node Id="@46" Category="CodeSchema_Property" Bounds="1573.66821160474,341.285440002149,68.7090614540484,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Id" />
     <Node Id="@47" Category="CodeSchema_Property" Bounds="230.386896456699,239.797593634517,150.295728120715,25" CodeSchemaProperty_IsStatic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="ProviderMapping" />
-    <Node Id="@6" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:18" Bounds="457.352174956882,466.715412737812,328.053333333334,231.960619092928" CodeSchemaProperty_StrongName="Foodies.Foody.Auth.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(5cc5a000-1fa4-4928-8454-70a065bd1095.OutputPath)" Group="Expanded" Label="Foodies.Foody.Auth.Domain.dll">
+    <Node Id="@6" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:18" Bounds="457.352174956882,466.715412737812,328.053333333334,231.960619092928" CodeSchemaProperty_StrongName="Unidash.Auth.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(5cc5a000-1fa4-4928-8454-70a065bd1095.OutputPath)" Group="Expanded" Label="Unidash.Auth.Domain.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@8" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:20" Bounds="160.881591629196,60.8833604461223,391.833432413737,375.832029727941" CodeSchemaProperty_StrongName="Foodies.Foody.Auth.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPath)" Group="Expanded" Label="Foodies.Foody.Auth.Application.dll">
+    <Node Id="@8" Category="CodeSchema_Assembly" AssemblyTimestamp="11/28/2019 10:55:20" Bounds="160.881591629196,60.8833604461223,391.833432413737,375.832029727941" CodeSchemaProperty_StrongName="Unidash.Auth.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FilePath="$(e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPath)" Group="Expanded" Label="Unidash.Auth.Application.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="Auth{6A01727A-798B-4743-9F59-1B8E72109EA6}" Category="CodeMap_SolutionFolder" Bounds="140.881593611368,20.8832604461222,1029.44939829802,697.792871384618" Group="Expanded" Label="Auth" />
@@ -204,14 +204,14 @@
     <Alias n="6" Id="(@5)" />
     <Alias n="7" Uri="Assembly=$(e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPathUri)" />
     <Alias n="8" Id="(@7)" />
-    <Alias n="9" Id="Namespace=Foodies.Foody.Auth.Application.Controllers" />
+    <Alias n="9" Id="Namespace=Unidash.Auth.Application.Controllers" />
     <Alias n="10" Id="(@7 @9)" />
-    <Alias n="11" Id="Namespace=Foodies.Foody.Auth.Commands" />
+    <Alias n="11" Id="Namespace=Unidash.Auth.Commands" />
     <Alias n="12" Id="(@3 @11)" />
-    <Alias n="13" Id="Namespace=Foodies.Foody.Auth.Domain.UserAggregate" />
+    <Alias n="13" Id="Namespace=Unidash.Auth.Domain.UserAggregate" />
     <Alias n="14" Id="(@5 @13)" />
-    <Alias n="15" Id="(@1 Namespace=Foodies.Foody.Core.Domain)" />
-    <Alias n="16" Id="Namespace=Foodies.Foody.Core.Infrastructure" />
+    <Alias n="15" Id="(@1 Namespace=Unidash.Core.Domain)" />
+    <Alias n="16" Id="Namespace=Unidash.Core.Infrastructure" />
     <Alias n="17" Id="(@1 @16)" />
     <Alias n="18" Id="Type=(Name=IEntityRepository GenericParameterCount=1)" />
     <Alias n="19" Id="(@1 @16 @18)" />
@@ -221,7 +221,7 @@
     <Alias n="23" Id="(@3 @11 @22)" />
     <Alias n="24" Id="Type=CreateUserCommandHandler" />
     <Alias n="25" Id="(@3 @11 @24)" />
-    <Alias n="26" Id="(@1 Namespace=Foodies.Foody.Core.Domain Type=Entity)" />
+    <Alias n="26" Id="(@1 Namespace=Unidash.Core.Domain Type=Entity)" />
     <Alias n="27" Id="Type=User" />
     <Alias n="28" Id="(@5 @13 @27)" />
     <Alias n="29" Uri="Assembly=file:///C:/Users/GinoMessmer/.nuget/packages/mediatr/7.0.0/lib/netstandard2.0/MediatR.dll" />
@@ -241,7 +241,7 @@
     <Alias n="43" Id="(@3 @11 @22 Member=EmailAddress)" />
     <Alias n="44" Id="(@7 @9 @20 Member=Finalize)" />
     <Alias n="45" Id="(@3 @11 @22 Member=Id)" />
-    <Alias n="46" Id="(@1 Namespace=Foodies.Foody.Core.Domain Type=Entity Member=Id)" />
+    <Alias n="46" Id="(@1 Namespace=Unidash.Core.Domain Type=Entity Member=Id)" />
     <Alias n="47" Id="(@7 @9 @20 Member=ProviderMapping)" />
   </IdentifierAliases>
   <Styles>
@@ -462,13 +462,13 @@
     </Style>
   </Styles>
   <Paths>
-    <Path Id="0188f434-7c54-4d00-8a6d-d4049633c2cf.OutputPath" Value="C:\Projects\DHBW\Foodies.Foody\Foodies.Foody.Auth\bin\Debug\netcoreapp3.0\Foodies.Foody.Auth.dll" />
-    <Path Id="0188f434-7c54-4d00-8a6d-d4049633c2cf.OutputPathUri" Value="file:///C:/Projects/DHBW/Foodies.Foody/Foodies.Foody.Auth/bin/Debug/netcoreapp3.0/Foodies.Foody.Auth.dll" />
-    <Path Id="5cc5a000-1fa4-4928-8454-70a065bd1095.OutputPath" Value="C:\Projects\DHBW\Foodies.Foody\Foodies.Foody.Auth.Domain\bin\Debug\netcoreapp3.0\Foodies.Foody.Auth.Domain.dll" />
-    <Path Id="5cc5a000-1fa4-4928-8454-70a065bd1095.OutputPathUri" Value="file:///C:/Projects/DHBW/Foodies.Foody/Foodies.Foody.Auth.Domain/bin/Debug/netcoreapp3.0/Foodies.Foody.Auth.Domain.dll" />
-    <Path Id="a47b23b4-0218-41eb-babf-3316f9a38a86.OutputPath" Value="C:\Projects\DHBW\Foodies.Foody\Foodies.Foody.Core\bin\Debug\netcoreapp3.0\Foodies.Foody.Core.dll" />
-    <Path Id="a47b23b4-0218-41eb-babf-3316f9a38a86.OutputPathUri" Value="file:///C:/Projects/DHBW/Foodies.Foody/Foodies.Foody.Core/bin/Debug/netcoreapp3.0/Foodies.Foody.Core.dll" />
-    <Path Id="e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPath" Value="C:\Projects\DHBW\Foodies.Foody\Foodies.Foody.Auth.Application\bin\Debug\netcoreapp3.0\Foodies.Foody.Auth.Application.dll" />
-    <Path Id="e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPathUri" Value="file:///C:/Projects/DHBW/Foodies.Foody/Foodies.Foody.Auth.Application/bin/Debug/netcoreapp3.0/Foodies.Foody.Auth.Application.dll" />
+    <Path Id="0188f434-7c54-4d00-8a6d-d4049633c2cf.OutputPath" Value="C:\Projects\DHBW\Unidash\Unidash.Auth\bin\Debug\netcoreapp3.0\Unidash.Auth.dll" />
+    <Path Id="0188f434-7c54-4d00-8a6d-d4049633c2cf.OutputPathUri" Value="file:///C:/Projects/DHBW/Unidash/Unidash.Auth/bin/Debug/netcoreapp3.0/Unidash.Auth.dll" />
+    <Path Id="5cc5a000-1fa4-4928-8454-70a065bd1095.OutputPath" Value="C:\Projects\DHBW\Unidash\Unidash.Auth.Domain\bin\Debug\netcoreapp3.0\Unidash.Auth.Domain.dll" />
+    <Path Id="5cc5a000-1fa4-4928-8454-70a065bd1095.OutputPathUri" Value="file:///C:/Projects/DHBW/Unidash/Unidash.Auth.Domain/bin/Debug/netcoreapp3.0/Unidash.Auth.Domain.dll" />
+    <Path Id="a47b23b4-0218-41eb-babf-3316f9a38a86.OutputPath" Value="C:\Projects\DHBW\Unidash\Unidash.Core\bin\Debug\netcoreapp3.0\Unidash.Core.dll" />
+    <Path Id="a47b23b4-0218-41eb-babf-3316f9a38a86.OutputPathUri" Value="file:///C:/Projects/DHBW/Unidash/Unidash.Core/bin/Debug/netcoreapp3.0/Unidash.Core.dll" />
+    <Path Id="e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPath" Value="C:\Projects\DHBW\Unidash\Unidash.Auth.Application\bin\Debug\netcoreapp3.0\Unidash.Auth.Application.dll" />
+    <Path Id="e4e39d5e-f594-487d-bef9-b88330212f5f.OutputPathUri" Value="file:///C:/Projects/DHBW/Unidash/Unidash.Auth.Application/bin/Debug/netcoreapp3.0/Unidash.Auth.Application.dll" />
   </Paths>
 </DirectedGraph>

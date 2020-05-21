@@ -5,6 +5,13 @@
 
 trigger:
 - master
+- dev
+
+parameters:
+- name: isLatestImage
+  displayName: 'Include Latest Tag'
+  type: boolean
+  default: false
 
 stages:
 - stage: Build
@@ -21,7 +28,7 @@ stages:
         dockerRegistryEndpoint: 'hub.docker.com'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Build services'
-        includeLatestTag: true
+        additionalImageTags: $(Build.BuildId)
     - task: DockerCompose@0
       displayName: 'Push Images'
       # we don't want to push any images during a PR
@@ -31,6 +38,9 @@ stages:
         dockerRegistryEndpoint: 'hub.docker.com'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Push services'
+        additionalImageTags: $(Build.BuildId)
+        includeLatestTag: ${{parameters.isLatestImage}}
+        includeSourceTags: true
 
 - stage: Test
   jobs:

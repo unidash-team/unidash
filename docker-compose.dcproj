@@ -6,7 +6,7 @@
     <ProjectGuid>83641d31-a1cf-496f-b4a9-83acc7df1359</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
-    <DockerServiceName>foodies.foody.canteen.application</DockerServiceName>
+    <DockerServiceName>Unidash.canteen.application</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

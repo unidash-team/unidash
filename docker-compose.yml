@@ -5,7 +5,7 @@ services:
     image: unidash/auth
     build:
       context: .
-      dockerfile: Foodies.Foody.Auth.Application/Dockerfile
+      dockerfile: Unidash.Auth.Application/Dockerfile
     depends_on:
       - mongodb
 
@@ -13,13 +13,13 @@ services:
     image: unidash/canteen
     build:
       context: .
-      dockerfile: Foodies.Foody.Canteen.Application/Dockerfile
+      dockerfile: Unidash.Canteen.Application/Dockerfile
 
   chat:
     image: unidash/chat
     build:
       context: .
-      dockerfile: Foodies.Foody.Chat.Application/Dockerfile
+      dockerfile: Unidash.Chat.Application/Dockerfile
 
   mongodb:
     image: mongo
