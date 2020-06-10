@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Unidash.Auth.Domain.UserAggregate;
 using Unidash.Auth.Users.Commands;
-using Unidash.Auth.Users.DataTransfer;
+using Unidash.Auth.Users.Requests.DataTransfer;
 
 namespace Unidash.Auth.Users
 {

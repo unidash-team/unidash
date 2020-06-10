@@ -1,11 +1,11 @@
-﻿using System.Threading;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 using System.Threading.Tasks;
 using Unidash.Auth.Users.Commands;
 using Unidash.Auth.Users.Queries;
 using Unidash.Core.Security;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Unidash.Auth.Users.Requests
 {

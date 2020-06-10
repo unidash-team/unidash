@@ -1,10 +1,10 @@
-﻿using System;
+﻿using FluentAssertions;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
-using FluentAssertions;
 using Unidash.Core.Security;
-using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
 namespace Unidash.Core.Tests.Security
@@ -19,8 +19,9 @@ namespace Unidash.Core.Tests.Security
             const string userId = "12345";
 
             // Act
-            var jwt = service.WriteToken(new Dictionary<string, string> {{ "uid", userId }}, 
-                meta: new JwtTokenMeta {
+            var jwt = service.WriteToken(new Dictionary<string, string> { { "uid", userId } },
+                meta: new JwtTokenMeta
+                {
                     ExpiresAt = DateTime.Now.AddDays(1),
                     Audience = "unidash",
                     Issuer = "unidash"
@@ -40,7 +41,7 @@ namespace Unidash.Core.Tests.Security
             const string issuer = "unidash";
 
             // Act
-            var jwt = services.WriteToken(new Dictionary<string, string> {{"uid", userId}},
+            var jwt = services.WriteToken(new Dictionary<string, string> { { "uid", userId } },
                 new JwtTokenMeta
                 {
                     ExpiresAt = DateTime.Now.AddDays(1),
@@ -98,7 +99,7 @@ namespace Unidash.Core.Tests.Security
             const string issuer = "unidash";
 
             // Act
-            var jwt = services.WriteToken(new Dictionary<string, string> {{ ClaimTypes.Name, userId }},
+            var jwt = services.WriteToken(new Dictionary<string, string> { { ClaimTypes.Name, userId } },
                 new JwtTokenMeta
                 {
                     ExpiresAt = DateTime.Now.AddDays(1),
@@ -108,7 +109,8 @@ namespace Unidash.Core.Tests.Security
 
             var claims = services.ReadToken(jwt, new TokenValidationParameters
             {
-                ValidAudience = audience, ValidIssuer = issuer
+                ValidAudience = audience,
+                ValidIssuer = issuer
             });
 
             // Assert

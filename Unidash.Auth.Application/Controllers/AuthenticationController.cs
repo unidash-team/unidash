@@ -1,21 +1,16 @@
-﻿using System;
+﻿using AspNet.Security.OAuth.Discord;
+using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using AspNet.Security.OAuth.Discord;
-using Unidash.Auth.Domain.UserAggregate;
 using Unidash.Auth.Users.Commands;
 using Unidash.Auth.Users.Requests;
-using Unidash.Core.Infrastructure;
-using MediatR;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Unidash.Auth.Application.Controllers
 {

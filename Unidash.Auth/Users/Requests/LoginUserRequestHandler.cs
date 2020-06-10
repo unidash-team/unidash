@@ -1,15 +1,13 @@
-﻿using System;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using Unidash.Auth.Domain.UserAggregate;
 using Unidash.Auth.Users.Queries;
-using Unidash.Core.Infrastructure;
 using Unidash.Core.Security;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Unidash.Auth.Users.Requests
 {
@@ -33,7 +31,7 @@ namespace Unidash.Auth.Users.Requests
         {
             // Get user and check whether password is correct
             var userMatch = await _mediator.Send(new FindUserByEmailQuery(request.EmailAddress), cancellationToken);
-            
+
             if (userMatch == null)
                 return new NotFoundObjectResult("User not found");
 

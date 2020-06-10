@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Unidash.Auth.Users.Requests

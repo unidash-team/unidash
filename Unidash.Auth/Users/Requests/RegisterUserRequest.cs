@@ -1,7 +1,5 @@
-﻿using System.Text;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver.Core.Misc;
 
 namespace Unidash.Auth.Users.Requests
 {

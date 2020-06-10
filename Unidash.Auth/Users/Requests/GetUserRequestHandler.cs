@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using Unidash.Auth.Users.DataTransfer;
-using Unidash.Auth.Users.Queries;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
+using Unidash.Auth.Users.Queries;
+using Unidash.Auth.Users.Requests.DataTransfer;
 
 namespace Unidash.Auth.Users.Requests
 {

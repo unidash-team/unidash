@@ -1,5 +1,5 @@
-﻿using System;
-using Mongo2Go;
+﻿using Mongo2Go;
+using System;
 
 namespace Unidash.Core.Tests.SeedWork
 {

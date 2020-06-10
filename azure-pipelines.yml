@@ -8,27 +8,28 @@ trigger:
 - dev
 
 parameters:
-- name: isLatestImage
-  displayName: 'Include Latest Tag'
-  type: boolean
-  default: false
+- name: imageTag
+  displayName: 'Image Tag'
+  type: string
+  default: $(Build.BuildId)
 
 stages:
 - stage: Build
+  pool:
+    vmImage: 'ubuntu-latest'
   jobs:
   - job: BuildDocker
     displayName: 'Build Docker Images'
-    pool:
-      vmImage: 'ubuntu-latest'
     steps:
     - task: DockerCompose@0
-      displayName: 'Build Docker Compose Services'
+      displayName: 'Build Images'
       inputs:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'hub.docker.com'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Build services'
-        additionalImageTags: $(Build.BuildId)
+        additionalImageTags: ${{parameters.imageTag}}
+        includeLatestTag: false
     - task: DockerCompose@0
       displayName: 'Push Images'
       # we don't want to push any images during a PR
@@ -38,16 +39,42 @@ stages:
         dockerRegistryEndpoint: 'hub.docker.com'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Push services'
-        additionalImageTags: $(Build.BuildId)
-        includeLatestTag: ${{parameters.isLatestImage}}
-        includeSourceTags: true
+        additionalImageTags: ${{parameters.imageTag}}
+        includeLatestTag: false
 
 - stage: Test
+  pool:
+    vmImage: 'ubuntu-latest'
   jobs:
+  - job: SonarCloud
+    displayName: 'Run SonarCloud Code Analysis'
+    steps:
+    - task: SonarCloudPrepare@1
+      displayName: 'Prepare SonarCloud'
+      inputs:
+        SonarCloud: 'sonarcloud.io'
+        organization: 'unidash'
+        scannerMode: 'MSBuild'
+        projectKey: 'unidash-backend'
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore Packages'
+      inputs:
+        command: 'restore'
+        projects: '**/*.sln'
+        feedsToUse: 'select'
+    - task: DotNetCoreCLI@2
+      displayName: 'Build Solution'
+      inputs:
+        command: 'build'
+        projects: '**/*.sln'
+    - task: SonarCloudAnalyze@1
+      displayName: 'Run SonarCloud Analysis'
+    - task: SonarCloudPublish@1
+      displayName: 'Publish SonarCloud Results'
+    
+
   - job: RunTests
     displayName: 'Run Tests'
-    pool:
-      vmImage: 'ubuntu-latest'
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'dotnet test'

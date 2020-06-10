@@ -1,9 +1,9 @@
+using FluentAssertions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FluentAssertions;
 using Unidash.Core.Domain;
 using Unidash.Core.Infrastructure;
 using Unidash.Core.Tests.SeedWork;
@@ -165,15 +165,15 @@ namespace Unidash.Core.Tests.Infrastructure
             // Assert
             entity.Data.Key
                 .Should()
-                .Be(expectedKey, 
+                .Be(expectedKey,
                     "because it exists in the repository with the same key");
         }
 
         // Seedwork
-        private IEntityRepository<GenericEntity<T>> CreateTestRepository<T>() => 
+        private IEntityRepository<GenericEntity<T>> CreateTestRepository<T>() =>
             new InMemoryEntityRepository<GenericEntity<T>>();
 
-        private IEntityRepository<GenericEntity<string>> CreateTestRepository() => 
+        private IEntityRepository<GenericEntity<string>> CreateTestRepository() =>
             CreateTestRepository<string>();
     }
 }

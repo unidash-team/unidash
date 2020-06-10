@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Unidash.Auth.Domain.UserAggregate;
-using Unidash.Auth.Users.Requests;
-using Unidash.Core.Infrastructure;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Unidash.Auth.Users.Requests;
 
 namespace Unidash.Auth.Application.Controllers
 {

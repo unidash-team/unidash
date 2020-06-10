@@ -9,6 +9,12 @@ services:
     depends_on:
       - mongodb
 
+  timetable:
+    image: unidash/timetable
+    build:
+      context: .
+      dockerfile: Unidash.TimeTable.Application/Dockerfile
+
   canteen:
     image: unidash/canteen
     build:
@@ -25,6 +31,9 @@ services:
     image: mongo
     volumes:
       - mongodb_data:/data/db
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
 
 volumes:
   mongodb_data:

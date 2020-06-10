@@ -1,8 +1,8 @@
-﻿using System.Threading;
+﻿using MediatR;
+using System.Threading;
 using System.Threading.Tasks;
 using Unidash.Auth.Domain.UserAggregate;
 using Unidash.Core.Infrastructure;
-using MediatR;
 
 namespace Unidash.Auth.Users.Commands
 {

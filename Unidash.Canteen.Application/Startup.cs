@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Unidash.Canteen.Core.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Unidash.Canteen.Core.Services;
 
 namespace Unidash.Canteen.Application
 {
@@ -33,11 +26,11 @@ namespace Unidash.Canteen.Application
             services.AddOpenApiDocument(settings => { settings.Title = "Unidash Canteen API"; });
             services.AddMediatR(typeof(Startup));
 
-            services.AddSingleton<ICanteenService, OpenMensaCanteenService>(provider => 
+            services.AddSingleton<ICanteenService, OpenMensaCanteenService>(provider =>
                 new OpenMensaCanteenService(new OpenMensaCanteenConfiguration
-                    {
-                        CanteenId = "33"
-                    }));
+                {
+                    CanteenId = "33"
+                }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

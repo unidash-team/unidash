@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using Unidash.Chat.Application.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Unidash.Chat.Application.Data
 {

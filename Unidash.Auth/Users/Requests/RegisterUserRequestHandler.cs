@@ -1,14 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using Unidash.Auth.Users.Commands;
 using Unidash.Auth.Users.Queries;
 using Unidash.Core.Security;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Unidash.Auth.Users.Requests
 {
@@ -18,7 +18,7 @@ namespace Unidash.Auth.Users.Requests
         private readonly IMapper _mapper;
         private readonly JwtTokenService _jwtTokenService;
 
-        public RegisterUserRequestHandler(IMediator mediator, IMapper mapper, 
+        public RegisterUserRequestHandler(IMediator mediator, IMapper mapper,
             JwtTokenService jwtTokenService)
         {
             _mediator = mediator;
@@ -46,7 +46,9 @@ namespace Unidash.Auth.Users.Requests
                 {ClaimTypes.Name, id}
             }, new JwtTokenMeta
             {
-                Audience = "unidash", Issuer = "unidash", ExpiresAt = DateTime.Now.AddDays(7)
+                Audience = "unidash",
+                Issuer = "unidash",
+                ExpiresAt = DateTime.Now.AddDays(7)
             });
 
             // Return action result

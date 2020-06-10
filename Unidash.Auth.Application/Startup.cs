@@ -1,25 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using AspNet.Security.OAuth.Discord;
 using AutoMapper;
-using Unidash.Auth.Users.Commands;
-using Unidash.Core.Infrastructure;
-using Unidash.Core.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
+using Unidash.Auth.Users.Commands;
+using Unidash.Core.Infrastructure;
+using Unidash.Core.Security;
 
 namespace Unidash.Auth.Application
 {
@@ -47,22 +39,13 @@ namespace Unidash.Auth.Application
             });
 
             services.AddControllers();
-            services.AddOpenApiDocument(settings => { settings.Title = "Unidash Auth API"; });
+            services.AddOpenApiDocument(settings => { settings.Title = "Unidash - Auth API"; });
 
             services.AddHttpContextAccessor();
             services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddDiscord(options =>
-                {
-                    options.ClientId = Configuration.GetSection("Unidash:Auth:Providers:Discord:ClientId").Value;
-                    options.ClientSecret = Configuration.GetSection("Unidash:Auth:Providers:Discord:ClientSecret").Value;
-                    options.Scope.Add("identify");
-                    options.Scope.Add("email");
-
-                    options.SaveTokens = true;
                 })
                 .AddJwtBearer(options =>
                 {

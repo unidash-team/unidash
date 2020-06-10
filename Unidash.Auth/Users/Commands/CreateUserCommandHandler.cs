@@ -1,10 +1,10 @@
-﻿using System.Threading;
+﻿using AutoMapper;
+using MediatR;
+using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using Unidash.Auth.Domain.UserAggregate;
 using Unidash.Core.Infrastructure;
 using Unidash.Core.Security;
-using MediatR;
 
 namespace Unidash.Auth.Users.Commands
 {

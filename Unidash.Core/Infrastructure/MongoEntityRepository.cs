@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Unidash.Core.Domain;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 
 namespace Unidash.Core.Infrastructure
 {
@@ -28,7 +27,7 @@ namespace Unidash.Core.Infrastructure
 
         private readonly IMongoDatabase _database;
 
-        public MongoEntityRepository(IOptions<MongoDbConnectionOptions> options) 
+        public MongoEntityRepository(IOptions<MongoDbConnectionOptions> options)
             : this(options.Value.ConnectionString, options.Value.DatabaseName)
         {
         }

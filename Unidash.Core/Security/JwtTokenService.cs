@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Unidash.Core.Security
 {
@@ -29,7 +28,7 @@ namespace Unidash.Core.Security
                 Subject = new ClaimsIdentity(claims
                     .Select(c => new Claim(c.Key, c.Value.ToString()))),
 
-                SigningCredentials = new SigningCredentials(SigningKey, 
+                SigningCredentials = new SigningCredentials(SigningKey,
                     SecurityAlgorithms.HmacSha256Signature)
             };
 

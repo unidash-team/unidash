@@ -1,10 +1,8 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Flurl.Http;
 using Unidash.Canteen.Core.Data;
-using RestSharp;
 
 namespace Unidash.Canteen.Core.Services
 {
@@ -34,7 +32,7 @@ namespace Unidash.Canteen.Core.Services
             var request = new RestRequest("canteens/{id}/days/{date}/meals", Method.GET)
                 .AddUrlSegment("id", _configuration.CanteenId)
                 .AddUrlSegment("date", FormatDateTime(date));
-            
+
             return await _client.GetAsync<List<Meal>>(request);
         }
 

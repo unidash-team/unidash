@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Unidash.Chat.Application.Data;
 using Unidash.Chat.Application.Hubs;
 using Unidash.Chat.Application.Models;
-using Microsoft.AspNetCore.SignalR;
 
 namespace Unidash.Chat.Application.Controllers
 {
@@ -65,8 +63,8 @@ namespace Unidash.Chat.Application.Controllers
             catch (DbUpdateException)
             {
                 if (ChatMessageExists(chatMessage.Id))
-                    return Conflict(); 
-                
+                    return Conflict();
+
                 throw;
             }
 

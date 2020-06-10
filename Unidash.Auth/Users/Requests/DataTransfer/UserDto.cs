@@ -1,4 +1,4 @@
-﻿namespace Unidash.Auth.Users.DataTransfer
+﻿namespace Unidash.Auth.Users.Requests.DataTransfer
 {
     public class UserDto
     {

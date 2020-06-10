@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 using Unidash.Auth.Domain.UserAggregate;
-using MediatR;
 
 namespace Unidash.Auth.Users.Queries
 {
