@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{56
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{66AF47D4-B73A-4310-AC7D-2E2C67299C14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unidash.Gateway", "Unidash.Gateway\Unidash.Gateway.csproj", "{AC2F697E-D51D-4F96-93E2-44E66031A65C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{979AAB10-117C-40E8-B495-45FC8DF73C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{979AAB10-117C-40E8-B495-45FC8DF73C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{979AAB10-117C-40E8-B495-45FC8DF73C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC2F697E-D51D-4F96-93E2-44E66031A65C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2F697E-D51D-4F96-93E2-44E66031A65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2F697E-D51D-4F96-93E2-44E66031A65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2F697E-D51D-4F96-93E2-44E66031A65C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{6AE28CB0-2A40-4CCF-8753-D552FF5DFF4A} = {5615772D-7F4F-4842-9F78-5CCFE73B019E}
 		{6199A431-6482-4159-82A8-280067AF3DF6} = {6AE28CB0-2A40-4CCF-8753-D552FF5DFF4A}
 		{979AAB10-117C-40E8-B495-45FC8DF73C16} = {928F652A-31E4-4AC4-9B58-E188ACEA570E}
+		{AC2F697E-D51D-4F96-93E2-44E66031A65C} = {5615772D-7F4F-4842-9F78-5CCFE73B019E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76B1D52B-E99C-443C-BD37-34C4D9A5CE5C}

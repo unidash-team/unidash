@@ -1,68 +1,36 @@
 version: '3.4'
 
 services:
-  auth:
+  gateway:
     networks: 
       - traefik
       - default
     deploy:
       labels:
         - "traefik.enable=true"
-        
-        - "traefik.http.services.auth_api.loadbalancer.server.port=80"
+        - "traefik.http.services.gateway.loadbalancer.server.port=80"
+        - "traefik.http.routers.gateway-secured.rule=Host(`tinf18b4.dev.unidash.top`)"
+        - "traefik.http.routers.gateway-secured.entrypoints=web-secured"
+        - "traefik.http.routers.gateway-secured.tls.certresolver=defaultlts"
 
-        - "traefik.http.routers.auth_api-secured.rule=Host(`auth.dev.unidash.top`)"
-        - "traefik.http.routers.auth_api-secured.entrypoints=web-secured"
-        - "traefik.http.routers.auth_api-secured.tls.certresolver=defaultlts"
-
+  auth:
+    networks:
+      - default
 
   timetable:
     networks: 
-      - traefik
       - default
     environment:
       - "ConnectionStrings:TimeTableDbContext=Server=mssql, 1433;Database=TimeTable;User=sa;Password=yourStrong!Password123;"
       - "TimeTable:UpstreamICalUrl=https://rapla.dhbw-karlsruhe.de/rapla?page=ical&user=eisenbiegler&file=TINF18B4"
-    deploy:
-      labels:
-        - "traefik.enable=true"
-        
-        - "traefik.http.services.timetable_api.loadbalancer.server.port=80"
-
-        - "traefik.http.routers.timetable_api-secured.rule=Host(`timetable.dev.unidash.top`)"
-        - "traefik.http.routers.timetable_api-secured.entrypoints=web-secured"
-        - "traefik.http.routers.timetable_api-secured.tls.certresolver=defaultlts"
-
 
   canteen:
     networks: 
-      - traefik
       - default
-    deploy:
-      labels:
-        - "traefik.enable=true"
-        
-        - "traefik.http.services.canteen_api.loadbalancer.server.port=80"
-
-        - "traefik.http.routers.canteen_api-secured.rule=Host(`canteen.dev.unidash.top`)"
-        - "traefik.http.routers.canteen_api-secured.entrypoints=web-secured"
-        - "traefik.http.routers.canteen_api-secured.tls.certresolver=defaultlts"
-
 
   chat:
     networks: 
-      - traefik
       - default
-    deploy:
-      labels:
-        - "traefik.enable=true"
-        
-        - "traefik.http.services.chat_api.loadbalancer.server.port=80"
-
-        - "traefik.http.routers.chat_api-secured.rule=Host(`chat.dev.unidash.top`)"
-        - "traefik.http.routers.chat_api-secured.entrypoints=web-secured"
-        - "traefik.http.routers.chat_api-secured.tls.certresolver=defaultlts"
-
 
   mssql:
     networks:

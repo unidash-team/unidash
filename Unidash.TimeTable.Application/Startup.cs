@@ -54,7 +54,7 @@ namespace Unidash.TimeTable.Application
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
