@@ -17,7 +17,7 @@ namespace Unidash.Auth.Users.Queries
 
         public async Task<User> Handle(FindUserQuery request, CancellationToken cancellationToken)
         {
-            return await _repository.FindByIdAsync(request.Id);
+            return await _repository.FindAsync(request.Id);
         }
     }
 }

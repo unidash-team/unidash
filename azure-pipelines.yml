@@ -11,7 +11,7 @@ parameters:
 - name: imageTag
   displayName: 'Image Tag'
   type: string
-  default: $(Build.BuildId)
+  default: ci-$(Build.BuildId)
 
 stages:
 - stage: Build
@@ -28,8 +28,9 @@ stages:
         dockerRegistryEndpoint: 'hub.docker.com'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Build services'
-        additionalImageTags: ${{parameters.imageTag}}
-        includeLatestTag: false
+        additionalImageTags: |
+          ${{parameters.imageTag}}
+          ci
     - task: DockerCompose@0
       displayName: 'Push Images'
       # we don't want to push any images during a PR
@@ -39,10 +40,12 @@ stages:
         dockerRegistryEndpoint: 'hub.docker.com'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Push services'
-        additionalImageTags: ${{parameters.imageTag}}
-        includeLatestTag: false
+        additionalImageTags: |
+          ${{parameters.imageTag}}
+          ci
 
 - stage: Test
+  dependsOn: []
   pool:
     vmImage: 'ubuntu-latest'
   jobs:

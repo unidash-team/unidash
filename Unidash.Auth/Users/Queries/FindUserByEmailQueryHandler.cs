@@ -18,7 +18,7 @@ namespace Unidash.Auth.Users.Queries
 
         public async Task<User> Handle(FindUserByEmailQuery request, CancellationToken cancellationToken)
         {
-            var list = await _repository.FindAllByAsync(u => u.EmailAddress == request.EmailAddress);
+            var list = await _repository.FindByPredicateAsync(u => u.EmailAddress == request.EmailAddress);
             return list.SingleOrDefault();
         }
     }

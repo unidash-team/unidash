@@ -2,10 +2,10 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Unidash.Core.Infrastructure;
 using Unidash.TimeTable.Options;
 using Unidash.TimeTable.Services;
 using Unidash.TimeTable.Workers;
@@ -26,7 +26,9 @@ namespace Unidash.TimeTable.Application
         {
             var coreAssembly = typeof(MappingProfile).Assembly;
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson();
+
             services.AddOpenApiDocument(settings => { settings.Title = "Unidash - Time Table API"; });
 
             services.AddOptions();
@@ -35,13 +37,18 @@ namespace Unidash.TimeTable.Application
             services.AddAutoMapper(coreAssembly);
             services.AddMediatR(coreAssembly);
 
+
+            services.Configure<MongoDbConnectionOptions>(options =>
+            {
+                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection") ?? "mongodb://mongodb";
+                options.DatabaseName = "unidash_timetable";
+            });
+            services.AddSingleton(typeof(IEntityRepository<>), typeof(MongoEntityRepository<>));
+
             services.AddSingleton<ICalendarService, EntityCalendarService>();
 
-            services.AddDbContext<TimeTableDbContext>(builder => builder.UseSqlServer(
-                Configuration.GetConnectionString("TimeTableDbContext"), b => { b.MigrationsAssembly(GetType().Namespace); }));
 
             services.AddHostedService<CalendarSyncBackgroundWorker>();
-
 
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
         }
@@ -56,9 +63,9 @@ namespace Unidash.TimeTable.Application
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseForwardedHeaders();
+
+            app.UseRouting();
 
             app.UseAuthorization();
 

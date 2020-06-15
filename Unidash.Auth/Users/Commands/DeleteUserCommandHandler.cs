@@ -17,7 +17,7 @@ namespace Unidash.Auth.Users.Commands
 
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            await _repository.RemoveByIdAsync(request.Id);
+            await _repository.RemoveAsync(request.Id);
             return Unit.Value;
         }
     }

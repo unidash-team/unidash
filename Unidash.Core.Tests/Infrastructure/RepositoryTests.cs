@@ -45,7 +45,7 @@ namespace Unidash.Core.Tests.Infrastructure
             // Act
             Entity entity = await repository.AddAsync(new GenericEntity<string>("The cake is a lie"));
             await repository.AddAsync(new GenericEntity<string>("Cupcakes and chocolate"));
-            var match = await repository.FindByIdAsync(entity.Id);
+            var match = await repository.FindAsync(entity.Id);
 
             // Assert
             match.Should().NotBeNull("because we added an entity before");
@@ -58,7 +58,7 @@ namespace Unidash.Core.Tests.Infrastructure
             // Act
             var entity = await repository.AddAsync(new GenericEntity<string>("Cookies"));
             await repository.RemoveAsync(entity);
-            var match = await repository.FindByIdAsync(entity.Id);
+            var match = await repository.FindAsync(entity.Id);
 
             // Assert
             match.Should().BeNull("because it was removed from the repository");
@@ -73,8 +73,8 @@ namespace Unidash.Core.Tests.Infrastructure
             var entity = await repository.AddAsync(domainModel);
             var id = entity.Id;
 
-            await repository.RemoveByIdAsync(id);
-            var match = await repository.FindByIdAsync(id);
+            await repository.RemoveAsync(id);
+            var match = await repository.FindAsync(id);
 
             // Assert
             match.Should().BeNull("because we removed it by its ID");
@@ -88,7 +88,7 @@ namespace Unidash.Core.Tests.Infrastructure
             var entity = GenericEntityBuilder.Create("Chocolate");
             entity.Id = "choco";
 
-            Assert.Null(await repository.FindByIdAsync(entity.Id));
+            Assert.Null(await repository.FindAsync(entity.Id));
             var newEntity = await repository.GetOrCreateAsync(entity.Id, entity);
 
             // Assert
@@ -141,7 +141,7 @@ namespace Unidash.Core.Tests.Infrastructure
         public async Task FindById_NotExistingItem_ReturnsNull(IEntityRepository<GenericEntity<string>> repository)
         {
             // Act
-            var entity = await repository.FindByIdAsync("12345");
+            var entity = await repository.FindAsync("12345");
 
             // Assert
             entity.Should().BeNull("because we didn't add it to the repository");
@@ -159,7 +159,7 @@ namespace Unidash.Core.Tests.Infrastructure
                     new KeyValuePair<string, string>(expectedKey, "unidash")));
 
             // Act
-            var entity = (await repository.FindAllByAsync(x => x.Data.Key == expectedKey))
+            var entity = (await repository.FindByPredicateAsync(x => x.Data.Key == expectedKey))
                 .First();
 
             // Assert

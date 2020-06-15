@@ -1,49 +1,52 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unidash.Core.Infrastructure;
 using Unidash.TimeTable.Models;
 
 namespace Unidash.TimeTable.Services
 {
     public class EntityCalendarService : ICalendarService
     {
+        private readonly IEntityRepository<CalendarEventEntity> _entityRepository;
         private readonly IMapper _mapper;
-        private readonly TimeTableDbContext _timeTableDbContext;
 
-        public EntityCalendarService(IServiceProvider serviceProvider, IMapper mapper)
+        public EntityCalendarService(IEntityRepository<CalendarEventEntity> entityRepository, IMapper mapper)
         {
+            _entityRepository = entityRepository;
             _mapper = mapper;
-            var scope = serviceProvider.CreateScope();
-            _timeTableDbContext = scope.ServiceProvider.GetRequiredService<TimeTableDbContext>();
         }
 
-        public async Task AddOrUpdateCalendarEntryAsync(CalendarEntryEntity entity)
+        public async Task AddOrUpdateCalendarEntryAsync(CalendarEventEntity entity)
         {
-            var isFound = await _timeTableDbContext.CalendarEntries.FindAsync(entity.Id) != null;
+            var isFound = (await _entityRepository.FindAsync(entity.Id)) != null;
             if (isFound)
                 await UpdateCalendarEntryAsync(entity);
             else
                 await AddCalendarEntryAsync(entity);
         }
 
-        public async Task AddCalendarEntryAsync(CalendarEntryEntity entity)
+        public Task<IEnumerable<CalendarEventEntity>> GetAllEventsAsync() => _entityRepository.FindAllAsync();
+
+        public Task RemoveEventAsync(string eventId) => _entityRepository.RemoveAsync(eventId);
+
+        public async Task AddCalendarEntryAsync(CalendarEventEntity entity)
         {
-            _timeTableDbContext.CalendarEntries.Add(entity);
-            await _timeTableDbContext.SaveChangesAsync();
+            await _entityRepository.AddAsync(entity);
         }
 
-        public async Task UpdateCalendarEntryAsync(CalendarEntryEntity entity)
+        public async Task UpdateCalendarEntryAsync(CalendarEventEntity entity)
         {
             // Get entity
-            var result = await _timeTableDbContext.CalendarEntries.FindAsync(entity.Id);
+            var result = await _entityRepository.FindAsync(entity.Id);
 
             // Map
             var updatedResult = _mapper.Map(result, entity);
 
             // Update
-            _timeTableDbContext.CalendarEntries.Update(updatedResult);
-            await _timeTableDbContext.SaveChangesAsync();
+            await _entityRepository.UpdateAsync(updatedResult);
         }
     }
 }

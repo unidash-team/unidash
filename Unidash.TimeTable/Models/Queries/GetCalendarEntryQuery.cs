@@ -2,11 +2,12 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using Unidash.TimeTable.Requests.DataTransfer;
+using Unidash.Core.Infrastructure;
+using Unidash.TimeTable.Models.Resources;
 
 namespace Unidash.TimeTable.Models.Queries
 {
-    public class GetCalendarEntryQuery : IRequest<CalendarEntry>
+    public class GetCalendarEntryQuery : IRequest<CalendarEventResource>
     {
         public string Id { get; set; }
 
@@ -15,21 +16,21 @@ namespace Unidash.TimeTable.Models.Queries
             Id = id;
         }
 
-        public class Handler : IRequestHandler<GetCalendarEntryQuery, CalendarEntry>
+        public class Handler : IRequestHandler<GetCalendarEntryQuery, CalendarEventResource>
         {
-            private readonly TimeTableDbContext _timeTableDbContext;
+            private readonly IEntityRepository<CalendarEventEntity> _entityRepository;
             private readonly IMapper _mapper;
 
-            public Handler(TimeTableDbContext timeTableDbContext, IMapper mapper)
+            public Handler(IEntityRepository<CalendarEventEntity> entityRepository, IMapper mapper)
             {
-                _timeTableDbContext = timeTableDbContext;
+                _entityRepository = entityRepository;
                 _mapper = mapper;
             }
 
-            public async Task<CalendarEntry> Handle(GetCalendarEntryQuery request, CancellationToken cancellationToken)
+            public async Task<CalendarEventResource> Handle(GetCalendarEntryQuery request, CancellationToken cancellationToken)
             {
-                var result = await _timeTableDbContext.CalendarEntries.FindAsync(request.Id);
-                return _mapper.Map<CalendarEntry>(result);
+                var result = await _entityRepository.FindAsync(request.Id);
+                return _mapper.Map<CalendarEventResource>(result);
             }
         }
     }

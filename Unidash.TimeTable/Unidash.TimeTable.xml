@@ -4,5 +4,30 @@
         <name>Unidash.TimeTable</name>
     </assembly>
     <members>
+        <member name="T:Unidash.TimeTable.Models.CalendarEventEntity.SourceDefaults">
+            <summary>
+            Provides constant defaults for <see cref="T:Unidash.TimeTable.Models.CalendarEventEntity"/>'s Source property.
+            </summary>
+        </member>
+        <member name="M:Unidash.TimeTable.Services.ICalendarService.AddOrUpdateCalendarEntryAsync(Unidash.TimeTable.Models.CalendarEventEntity)">
+            <summary>
+            Adds or updates an event by its ID.
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Unidash.TimeTable.Services.ICalendarService.GetAllEventsAsync">
+            <summary>
+            Returns all events.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Unidash.TimeTable.Services.ICalendarService.RemoveEventAsync(System.String)">
+            <summary>
+            Removes an event by its ID.
+            </summary>
+            <param name="eventId"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

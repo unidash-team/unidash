@@ -44,10 +44,10 @@ namespace Unidash.Core.Infrastructure
         public async Task<T> AddAsync(T entity)
         {
             await EntityCollection.InsertOneAsync(entity);
-            return await FindByIdAsync(entity.Id);
+            return await FindAsync(entity.Id);
         }
 
-        public async Task<T> FindByIdAsync(string entityId)
+        public async Task<T> FindAsync(string entityId)
         {
             return await EntityCollection
                 .Find(e => e.Id == entityId)
@@ -59,7 +59,7 @@ namespace Unidash.Core.Infrastructure
             await EntityCollection.DeleteOneAsync(e => e.Id == entity.Id);
         }
 
-        public async Task RemoveByIdAsync(string id)
+        public async Task RemoveAsync(string id)
         {
             await EntityCollection.DeleteOneAsync(e => e.Id == id);
         }
@@ -82,7 +82,7 @@ namespace Unidash.Core.Infrastructure
             return await entities.ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> FindAllByAsync(Expression<Func<T, bool>> match)
+        public async Task<IEnumerable<T>> FindByPredicateAsync(Expression<Func<T, bool>> match)
         {
             var entities = await EntityCollection
                 .AsQueryable()
@@ -91,6 +91,10 @@ namespace Unidash.Core.Infrastructure
 
             return entities;
         }
+
+        public Task UpdateAsync(T entity) => EntityCollection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+
+        public IQueryable<T> AsQueryable() => EntityCollection.AsQueryable();
 
         private IMongoCollection<T> EntityCollection => _database.GetCollection<T>($"{typeof(T).Namespace}.{typeof(T).Name}");
     }

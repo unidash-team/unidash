@@ -61,13 +61,31 @@ namespace Unidash.TimeTable.Workers
                 return;
             }
 
-            foreach (var calendarEvent in calendar.Events)
+            // Add or update events
+            var upstreamCalendarEvents = calendar.Events.OrderBy(x => x.Start).ToList();
+            foreach (var calendarEvent in upstreamCalendarEvents)
             {
-                var entry = _mapper.Map<CalendarEntryEntity>(calendarEvent);
+                var entry = _mapper.Map<CalendarEventEntity>(calendarEvent);
+                entry.Source = _options.Value.UpstreamICalUrl;
+
                 await _calendarService.AddOrUpdateCalendarEntryAsync(entry);
             }
 
-            _logger.LogInformation("Synchronized calendar from upstream source");
+            // Purge obsolete events
+            var events = (await _calendarService.GetAllEventsAsync()).ToList();
+            var obsoleteEventIds = events.Where(x => x.Source == _options.Value.UpstreamICalUrl)
+                .Select(x => x.Id)
+                .Except(upstreamCalendarEvents
+                    .Select(x => x.Uid));
+
+            // TODO: Add tests
+            foreach (var obsoleteEventId in obsoleteEventIds)
+            {
+                await _calendarService.RemoveEventAsync(obsoleteEventId);
+            }
+
+            _logger.LogInformation("Synchronized calendar from upstream source ({UpstreamSourceUrl})",
+                _options.Value.UpstreamICalUrl);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)

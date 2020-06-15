@@ -7,5 +7,7 @@ namespace Unidash.TimeTable.Models.Queries.Parameters
         public DateTime? From { get; set; }
 
         public DateTime? To { get; set; }
+
+        public bool IncludeHidden { get; set; }
     }
 }

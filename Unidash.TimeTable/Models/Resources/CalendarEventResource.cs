@@ -1,9 +1,9 @@
 ﻿using System;
 using Unidash.Core.Domain;
 
-namespace Unidash.TimeTable.Models
+namespace Unidash.TimeTable.Models.Resources
 {
-    public class CalendarEntryEntity : Entity
+    public class CalendarEventResource : EntityDto
     {
         public string Title { get; set; }
 
@@ -11,6 +11,10 @@ namespace Unidash.TimeTable.Models
 
         public DateTime EndsAt { get; set; }
 
+        public TimeSpan Duration => EndsAt.Subtract(StartsAt);
+
         public bool IsHidden { get; set; }
+        
+        public string Source { get; set; }
     }
 }
