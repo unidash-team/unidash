@@ -16,6 +16,8 @@ services:
   auth:
     networks:
       - default
+    environment:
+      - "ConnectionStrings:AuthDbContext=Server=mssql, 1433;Database=Auth;User=sa;Password=yourStrong!Password123;"
 
   timetable:
     networks: 

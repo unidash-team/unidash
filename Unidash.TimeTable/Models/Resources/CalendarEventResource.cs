@@ -14,7 +14,7 @@ namespace Unidash.TimeTable.Models.Resources
         public TimeSpan Duration => EndsAt.Subtract(StartsAt);
 
         public bool IsHidden { get; set; }
-        
+
         public string Source { get; set; }
     }
 }

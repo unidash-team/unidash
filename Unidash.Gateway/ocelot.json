@@ -13,7 +13,7 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/{catchAll}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [ "GET", "POST" ],
       "SwaggerKey": "auth"
     },
     {

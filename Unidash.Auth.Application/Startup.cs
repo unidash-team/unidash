@@ -3,13 +3,16 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using Unidash.Auth.Users.Commands;
+using Unidash.Auth.Application.Database;
+using Unidash.Auth.Application.DataModels;
 using Unidash.Core.Infrastructure;
 using Unidash.Core.Security;
 
@@ -32,21 +35,20 @@ namespace Unidash.Auth.Application
                                        "verysecureindeed!123"));
 
             services.AddOptions();
-            services.Configure<MongoDbConnectionOptions>(options =>
-            {
-                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection") ?? "mongodb://mongodb";
-                options.DatabaseName = "unidash_auth";
-            });
 
             services.AddControllers();
             services.AddOpenApiDocument(settings => { settings.Title = "Unidash - Auth API"; });
 
             services.AddHttpContextAccessor();
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
+
+            services.AddDbContext<AuthDbContext>(builder =>
+                builder.UseSqlServer(Configuration.GetConnectionString("AuthDbContext")));
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<AuthDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -67,19 +69,9 @@ namespace Unidash.Auth.Application
                 })
                 .AddCookie();
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("GlobalAdmin", policy => policy.RequireRole("GlobalAdmin"));
-                options.AddPolicy("CourseAdmin", policy => policy.RequireRole("CourseAdmin"));
-            });
+            services.AddMediatR(GetType().Assembly);
+            services.AddAutoMapper(GetType().Assembly);
 
-            services.AddMediatR(typeof(CreateUserCommand).Assembly);
-            services.AddAutoMapper(typeof(CreateUserCommand).Assembly);
-
-
-            services.AddSingleton(typeof(IEntityRepository<>), typeof(MongoEntityRepository<>));
-
-            services.AddSingleton<PasswordService>();
             services.AddSingleton<JwtTokenService>(provider => new JwtTokenService(unidashSecurityKey));
         }
 
@@ -91,17 +83,16 @@ namespace Unidash.Auth.Application
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
+            app.UseForwardedHeaders();
 
             app.UseRouting();
 
-            app.UseOpenApi().UseSwaggerUi3();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
-
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

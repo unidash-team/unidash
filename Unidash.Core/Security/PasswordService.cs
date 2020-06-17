@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 
 namespace Unidash.Core.Security
 {
+    [Obsolete]
     public class PasswordService
     {
         public string Hash(string rawPassword, string base64Salt) =>

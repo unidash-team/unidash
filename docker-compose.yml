@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: Unidash.Auth.Application/Dockerfile
     depends_on:
-      - mongodb
+      - mssql
 
   timetable:
     image: unidash/timetable

@@ -8,9 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Unidash.Auth.Application/Unidash.Auth.Application.csproj", "Unidash.Auth.Application/"]
-COPY ["Unidash.Auth.Domain/Unidash.Auth.Domain.csproj", "Unidash.Auth.Domain/"]
 COPY ["Unidash.Core/Unidash.Core.csproj", "Unidash.Core/"]
-COPY ["Unidash.Auth/Unidash.Auth.csproj", "Unidash.Auth/"]
 RUN dotnet restore "Unidash.Auth.Application/Unidash.Auth.Application.csproj"
 COPY . .
 WORKDIR "/src/Unidash.Auth.Application"
