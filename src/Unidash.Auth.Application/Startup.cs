@@ -31,7 +31,7 @@ namespace Unidash.Auth.Application
         public void ConfigureServices(IServiceCollection services)
         {
             var unidashSecurityKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(Configuration.GetSection("Unidash:Auth:SecurityKey").Value ??
+                Encoding.UTF8.GetBytes(Configuration.GetSection("Unidash:AuthSecurityKey").Value ??
                                        "verysecureindeed!123"));
 
             services.AddOptions();

@@ -1,21 +1,20 @@
-# Unidash
-TODO
+<center>
+<h1>Unidash</h1>
 
-## Configuration
-All configuration entries can be configured via environment variables or appsettings.json.
+[![Build Status](https://dev.azure.com/foodies-inc/Unidash/_apis/build/status/unidash-backend?branchName=dev&stageName=Build&jobName=Build%20Docker%20Images)](https://dev.azure.com/foodies-inc/Unidash/_build/latest?definitionId=2&branchName=dev) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/foodies-inc/unidash/2) ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/foodies-inc/unidash/2)
 
-Every service can be equipped with Azure Application Insights. For this, set `APPINSIGHTS_INSTRUMENTATIONKEY` with the instrumentation key from your AI instance. 
+Unidash is a sophisticated web project tailored for students that consolidate external services that are used by universities into a single, central space.
+</center>
 
-### Auth Service
-### Canteen Service
-### Chat Service
-### Time Table Service
-| Key | Description |
-| --- | --- |
-| `TimeTable:UpstreamICalUrl` | The URL to the upstream iCal file |
-| `ConnectionStrings:TimeTableDbContext` | The connection string to the MSSQL database |
+## Intro
+One of the challenges we face when we work for university daily is that we scrap information on a variety of separate services. However, this is not only time expensive, but also frustrating when some services are not reachable. Our project aims to unite these and be extensible with ease by utilizing microservices and can be expanded to other universities. We support external services like RaPla for time tables, Deutsche Bahn, Open Mensa, and many more. You decide which services you'd like to use.
 
-## Deployment
-```sh
-docker stack deploy unidash -c docker-compose.yml -c docker-compose.dev.yml -c docker-compose.traefik.yml 
-```
+This repository contains the back-end projects for Unidash. Works best with Docker.
+
+### Documentation
+- [Configuration](docs/Configuration.md)
+- [Deployment](docs/Deployment.md)
+
+### Further Links
+- [Website](https://unidash.top)
+- [Docker Hub](https://hub.docker.com/u/unidash)

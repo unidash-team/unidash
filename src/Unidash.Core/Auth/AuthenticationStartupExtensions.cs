@@ -17,7 +17,7 @@ namespace Unidash.Core.Auth
 
                         ValidateAudience = false,
 
-                        ValidateIssuerSigningKey = false
+                        ValidateIssuerSigningKey = false // TODO: Add issuer signing key
                     };
                 });
         }

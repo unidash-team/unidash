@@ -8,10 +8,15 @@ trigger:
 - dev
 
 parameters:
+# Set imageTag to 'null' if you don't want to push images to Docker Hub.
 - name: imageTag
   displayName: 'Image Tag'
   type: string
   default: ci-$(Build.BuildId)
+
+variables:
+- name: buildConfiguration
+  value: Release
 
 stages:
 - stage: Build
@@ -34,7 +39,7 @@ stages:
     - task: DockerCompose@0
       displayName: 'Push Images'
       # we don't want to push any images during a PR
-      condition: not(eq(variables['Build.Reason'], 'PullRequest'))
+      condition: or(not(eq(variables['Build.Reason'], 'PullRequest')), not(eq('${{parameters.imageTag}}', 'null')))
       inputs:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'hub.docker.com'
@@ -43,6 +48,33 @@ stages:
         additionalImageTags: |
           ${{parameters.imageTag}}
           ci
+
+  - job: BuildDotNet
+    displayName: 'Build with .NET Core'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: 'restore'
+        projects: '**/*.sln'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'build'
+        arguments: '--configuration $(buildConfiguration)'
+        projects: '**/*.sln'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/BuildDotNet'
+        zipAfterPublish: false
+    - publish: $(Build.ArtifactStagingDirectory)/BuildDotNet
+      displayName: 'Publish Build Artifacts'
+      artifact: drop
+
 
 - stage: Test
   dependsOn: []
@@ -74,7 +106,6 @@ stages:
       displayName: 'Run SonarCloud Analysis'
     - task: SonarCloudPublish@1
       displayName: 'Publish SonarCloud Results'
-    
 
   - job: RunTests
     displayName: 'Run Tests'
@@ -84,5 +115,3 @@ stages:
       inputs:
         command: 'test'
         projects: '**/**Tests.csproj'
-
-# - stage: Deploy
