@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Unidash.TimeTable.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Requests\Parameters\**" />
+    <EmbeddedResource Remove="Requests\Parameters\**" />
+    <None Remove="Requests\Parameters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Ensure.That" Version="9.2.0" />
+    <PackageReference Include="Ical.Net" Version="4.1.11" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Unidash.Core\Unidash.Core.csproj" />
+  </ItemGroup>
+
+</Project>

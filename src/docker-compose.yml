@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  gateway:
+    image: unidash/gateway
+    build:
+      context: .
+      dockerfile: Unidash.Gateway/Dockerfile
+
+  auth:
+    image: unidash/auth
+    build:
+      context: .
+      dockerfile: Unidash.Auth.Application/Dockerfile
+    depends_on:
+      - mssql
+
+  timetable:
+    image: unidash/timetable
+    build:
+      context: .
+      dockerfile: Unidash.TimeTable.Application/Dockerfile
+    depends_on:
+      - mssql
+
+  canteen:
+    image: unidash/canteen
+    build:
+      context: .
+      dockerfile: Unidash.Canteen.Application/Dockerfile
+
+  chat:
+    image: unidash/chat
+    build:
+      context: .
+      dockerfile: Unidash.Chat.Application/Dockerfile
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongodb_data:/data/db
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
+volumes:
+  mongodb_data:

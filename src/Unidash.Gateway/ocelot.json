@@ -1,0 +1,101 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://api.example.com"
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/{catchAll}",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "canteen",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/canteen/{catchAll}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "canteen"
+    },
+    {
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "timetable",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/timetable/{catchAll}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "timetable"
+    },
+    {
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chat",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/chat/{catchAll}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "chat"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "auth",
+      "Config": [
+        {
+          "Name": "Unidash - Auth API",
+          "Version": "v1",
+          "Url": "http://auth/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "canteen",
+      "Config": [
+        {
+          "Name": "Unidash - Canteen API",
+          "Version": "v1",
+          "Url": "http://canteen/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "timetable",
+      "Config": [
+        {
+          "Name": "Unidash - Time Table API",
+          "Version": "v1",
+          "Url": "http://timetable/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "chat",
+      "Config": [
+        {
+          "Name": "Unidash - Chat API",
+          "Version": "v1",
+          "Url": "http://chat/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

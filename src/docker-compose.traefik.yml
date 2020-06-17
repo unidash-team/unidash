@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  traefik:
+    image: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    command:
+      - --api.insecure=true # set to 'false' on production
+      - --api.dashboard=true # see https://docs.traefik.io/v2.0/operations/dashboard/#secure-mode for how to secure the dashboard
+      - --api.debug=true # enable additional endpoints for debugging and profiling
+      - --log.level=DEBUG # debug while we get it working, for more levels/info see https://docs.traefik.io/observability/logs/
+      - --providers.docker=true
+      - --providers.docker.swarmMode=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=unidash_traefik
+      - --entrypoints.web.address=:80
+      - --entrypoints.web-secured.address=:443
+      - --certificatesresolvers.defaultlts.acme.httpChallenge.entrypoint=web
+      - --certificatesresolvers.defaultlts.acme.email=ud@ginomessmer.me
+      - --certificatesresolvers.defaultlts.acme.storage=/letsencrypt/acme.json
+    volumes:
+      - letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.services.api.loadbalancer.server.port=8080"
+        - "traefik.http.routers.api.rule=Host(`traefik.dev.unidash.top`)"
+        - "traefik.http.routers.api.entrypoints=web-secured"
+        - "traefik.http.routers.api.tls.certresolver=defaultlts"
+
+networks:
+  traefik:
+    driver: overlay
+
+volumes:
+  letsencrypt:

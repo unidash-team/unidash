@@ -5,28 +5,113 @@
 
 trigger:
 - master
+- dev
 
-pool:
-  vmImage: 'ubuntu-latest'
+parameters:
+# Set imageTag to 'null' if you don't want to push images to Docker Hub.
+- name: imageTag
+  displayName: 'Image Tag'
+  type: string
+  default: ci-$(Build.BuildId)
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Run Tests'
-  inputs:
-    command: 'test'
-    projects: '**/**Tests.csproj'
-- task: DockerCompose@0
-  displayName: 'Build Docker Compose Services'
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'hub.docker.com'
-    dockerComposeFile: '**/docker-compose.yml'
-    action: 'Build services'
-    includeLatestTag: true
-- task: DockerCompose@0
-  displayName: 'Push Images'
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'hub.docker.com'
-    dockerComposeFile: '**/docker-compose.yml'
-    action: 'Push services'
+variables:
+- name: buildConfiguration
+  value: Release
+
+stages:
+- stage: Build
+  pool:
+    vmImage: 'ubuntu-latest'
+  jobs:
+  - job: BuildDocker
+    displayName: 'Build Docker Images'
+    steps:
+    - task: DockerCompose@0
+      displayName: 'Build Images'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'hub.docker.com'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Build services'
+        additionalImageTags: |
+          ${{parameters.imageTag}}
+          ci
+    - task: DockerCompose@0
+      displayName: 'Push Images'
+      # we don't want to push any images during a PR
+      condition: or(not(eq(variables['Build.Reason'], 'PullRequest')), not(eq('${{parameters.imageTag}}', 'null')))
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'hub.docker.com'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Push services'
+        additionalImageTags: |
+          ${{parameters.imageTag}}
+          ci
+
+  - job: BuildDotNet
+    displayName: 'Build with .NET Core'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: 'restore'
+        projects: '**/*.sln'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'build'
+        arguments: '--configuration $(buildConfiguration)'
+        projects: '**/*.sln'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/BuildDotNet'
+        zipAfterPublish: false
+    - publish: $(Build.ArtifactStagingDirectory)/BuildDotNet
+      displayName: 'Publish Build Artifacts'
+      artifact: drop
+
+
+- stage: Test
+  dependsOn: []
+  pool:
+    vmImage: 'ubuntu-latest'
+  jobs:
+  - job: SonarCloud
+    displayName: 'Run SonarCloud Code Analysis'
+    steps:
+    - task: SonarCloudPrepare@1
+      displayName: 'Prepare SonarCloud'
+      inputs:
+        SonarCloud: 'sonarcloud.io'
+        organization: 'unidash'
+        scannerMode: 'MSBuild'
+        projectKey: 'unidash-backend'
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore Packages'
+      inputs:
+        command: 'restore'
+        projects: '**/*.sln'
+        feedsToUse: 'select'
+    - task: DotNetCoreCLI@2
+      displayName: 'Build Solution'
+      inputs:
+        command: 'build'
+        projects: '**/*.sln'
+    - task: SonarCloudAnalyze@1
+      displayName: 'Run SonarCloud Analysis'
+    - task: SonarCloudPublish@1
+      displayName: 'Publish SonarCloud Results'
+
+  - job: RunTests
+    displayName: 'Run Tests'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: 'test'
+        projects: '**/**Tests.csproj'

@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  gateway:
+    networks: 
+      - traefik
+      - default
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.services.gateway.loadbalancer.server.port=80"
+        - "traefik.http.routers.gateway-secured.rule=Host(`tinf18b4.dev.unidash.top`)"
+        - "traefik.http.routers.gateway-secured.entrypoints=web-secured"
+        - "traefik.http.routers.gateway-secured.tls.certresolver=defaultlts"
+
+  auth:
+    networks:
+      - default
+    environment:
+      - "ConnectionStrings:AuthDbContext=Server=mssql, 1433;Database=Auth;User=sa;Password=yourStrong!Password123;"
+
+  timetable:
+    networks: 
+      - default
+    environment:
+      - "ConnectionStrings:TimeTableDbContext=Server=mssql, 1433;Database=TimeTable;User=sa;Password=yourStrong!Password123;"
+      - "TimeTable:UpstreamICalUrl=https://rapla.dhbw-karlsruhe.de/rapla?page=ical&user=eisenbiegler&file=TINF18B4"
+
+  canteen:
+    networks: 
+      - default
+
+  chat:
+    networks: 
+      - default
+
+  mssql:
+    networks:
+      - default
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=yourStrong!Password123
