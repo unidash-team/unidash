@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Unidash.Auth.Application.DataModels;
+using Unidash.Auth.Application.Features.Users.Requests.Responses;
 using Unidash.Core.Security;
 
 namespace Unidash.Auth.Application.Features.Users.Requests
@@ -48,7 +49,10 @@ namespace Unidash.Auth.Application.Features.Users.Requests
                         {ClaimTypes.Name, user.UserName}
                     }, new JwtTokenMeta(DateTime.UtcNow.AddDays(1), "unidash", "unidash"));
 
-                    return new OkObjectResult(token);
+                    return new OkObjectResult(new LoginUserResponse
+                    {
+                        AccessToken = token
+                    });
                 }
 
                 return new BadRequestObjectResult("Email or password is incorrect");

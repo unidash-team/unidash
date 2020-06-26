@@ -5,7 +5,7 @@ using Unidash.Auth.Application.DataModels;
 
 namespace Unidash.Auth.Application.Database
 {
-    public class AuthDbContext : IdentityDbContext<User, Role, Guid>
+    public class AuthDbContext : IdentityDbContext<User, Role, string>
     {
         public AuthDbContext()
         {

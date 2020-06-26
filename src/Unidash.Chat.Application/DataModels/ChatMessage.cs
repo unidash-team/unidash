@@ -1,17 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Unidash.Core.Domain;
 
-namespace Unidash.Chat.Application.Models
+namespace Unidash.Chat.Application.DataModels
 {
-    public class ChatMessage
+    public class ChatMessage : Entity
     {
-        [Key]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-
         [Required]
         public string UserId { get; set; }
 
         [Required]
         public string Message { get; set; }
+
+        [Required]
+        public string ChannelId { get; set; }
     }
 }

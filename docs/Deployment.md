@@ -1,3 +1,5 @@
+![](Assets/gateway.png)
+
 # Deployment
 TODO
 ```sh

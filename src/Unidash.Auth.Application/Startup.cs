@@ -11,8 +11,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using GreenPipes;
+using MassTransit;
+using NSwag.AspNetCore;
 using Unidash.Auth.Application.Database;
 using Unidash.Auth.Application.DataModels;
+using Unidash.Auth.Application.Features.Users.Requests;
+using Unidash.Core.Auth;
+using Unidash.Core.Extensions;
 using Unidash.Core.Infrastructure;
 using Unidash.Core.Security;
 
@@ -30,14 +36,13 @@ namespace Unidash.Auth.Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var unidashSecurityKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(Configuration.GetSection("Unidash:AuthSecurityKey").Value ??
-                                       "verysecureindeed!123"));
-
             services.AddOptions();
 
             services.AddControllers();
-            services.AddOpenApiDocument(settings => { settings.Title = "Unidash - Auth API"; });
+            services.AddOpenApiDocument(settings =>
+            {
+                settings.Title = "Unidash - Auth API";
+            });
 
             services.AddHttpContextAccessor();
 
@@ -48,31 +53,13 @@ namespace Unidash.Auth.Application
                 .AddEntityFrameworkStores<AuthDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidAudience = "unidash",
-                        ValidateAudience = true,
-
-                        ValidIssuer = "unidash",
-                        ValidateIssuer = true,
-
-                        IssuerSigningKey = unidashSecurityKey,
-                        ClockSkew = TimeSpan.FromMinutes(5)
-                    };
-
-                    options.IncludeErrorDetails = true;
-                    options.RequireHttpsMetadata = false;
-                    options.SaveToken = true;
-                })
-                .AddCookie();
+            services.AddUnidashAuthentication(Configuration.GetSection("Auth"));
 
             services.AddMediatR(GetType().Assembly);
             services.AddAutoMapper(GetType().Assembly);
+            services.AddMessageBroker(GetType());
 
-            services.AddSingleton<JwtTokenService>(provider => new JwtTokenService(unidashSecurityKey));
+            services.AddContextAccessors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,7 +76,11 @@ namespace Unidash.Auth.Application
             app.UseRouting();
 
             app.UseOpenApi();
-            app.UseSwaggerUi3();
+            app.UseSwaggerUi3(config =>
+            {
+                config.SwaggerRoutes.Add(new SwaggerUi3Route("v1 - Gateway", "/auth/swagger/v1/swagger.json"));
+                config.SwaggerRoutes.Add(new SwaggerUi3Route("v1", "/swagger/v1/swagger.json"));
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -97,6 +88,7 @@ namespace Unidash.Auth.Application
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

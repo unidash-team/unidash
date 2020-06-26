@@ -1,12 +1,16 @@
+using AutoMapper;
+using GreenPipes;
+using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Unidash.Chat.Application.Data;
+using Unidash.Chat.Application.Consumers;
 using Unidash.Chat.Application.Hubs;
 using Unidash.Core.Auth;
+using Unidash.Core.Extensions;
 
 namespace Unidash.Chat.Application
 {
@@ -25,12 +29,15 @@ namespace Unidash.Chat.Application
             services.AddControllers();
             services.AddOpenApiDocument();
 
-            services.AddUnidashAuthentication();
+            services.AddEntityRepository(Configuration.GetSection("Connections:MongoDb"));
+            services.AddUnidashAuthentication(Configuration.GetSection("Auth"));
+            services.AddContextAccessors();
+
+            services.AddMediatR(GetType().Assembly);
+            services.AddAutoMapper(GetType().Assembly);
+            services.AddMessageBroker(GetType());
 
             services.AddSignalR();
-
-            services.AddDbContext<ChatDbContext>(builder =>
-                builder.UseInMemoryDatabase("chat"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +52,7 @@ namespace Unidash.Chat.Application
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseOpenApi();
@@ -54,6 +62,7 @@ namespace Unidash.Chat.Application
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("chatHub");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

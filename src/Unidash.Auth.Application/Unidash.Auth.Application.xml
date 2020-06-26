@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unidash.Auth.Application</name>
+    </assembly>
+    <members>
+        <member name="M:Unidash.Auth.Application.Controllers.ConnectController.Register(Unidash.Auth.Application.Features.Users.Requests.RegisterUserRequest)">
+            <summary>
+            Registers the user.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Unidash.Auth.Application.Controllers.ConnectController.Login(Unidash.Auth.Application.Features.Users.Requests.LoginUserRequest)">
+            <summary>
+            Logins the user with the provided credentials and returns
+            an access token that can be used for other services.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Unidash.Auth.Application.Controllers.UserController.GetUser">
+            <summary>
+            Gets a single user based on the user ID extracted from the JWT token.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
