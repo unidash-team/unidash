@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Unidash.Chat.Application.Consumers;
 using Unidash.Chat.Application.Hubs;
+using Unidash.Chat.Application.Services;
 using Unidash.Core.Auth;
 using Unidash.Core.Extensions;
 
@@ -26,7 +27,7 @@ namespace Unidash.Chat.Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddOpenApiDocument();
 
             services.AddEntityRepository(Configuration.GetSection("Connections:MongoDb"));
@@ -36,6 +37,8 @@ namespace Unidash.Chat.Application
             services.AddMediatR(GetType().Assembly);
             services.AddAutoMapper(GetType().Assembly);
             services.AddMessageBroker(GetType());
+
+            services.AddSingleton<IMessageService, MessageService>();
 
             services.AddSignalR();
         }
@@ -49,6 +52,7 @@ namespace Unidash.Chat.Application
             }
 
             //app.UseHttpsRedirection();
+            app.UseForwardedHeaders();
 
             app.UseRouting();
 
@@ -61,7 +65,7 @@ namespace Unidash.Chat.Application
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("chatHub");
+                endpoints.MapHub<ChatHub>("/hubs/chat");
                 endpoints.MapHealthChecks("/health");
             });
         }

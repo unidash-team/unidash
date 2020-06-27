@@ -1,8 +1,9 @@
 ﻿using System;
+using Unidash.Core.Domain.Flags;
 
 namespace Unidash.Core.Domain
 {
-    public abstract class Entity
+    public abstract class Entity : IIdentityFlag
     {
         public string Id { get; set; }
 

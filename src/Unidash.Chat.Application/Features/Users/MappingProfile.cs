@@ -7,14 +7,13 @@ using Unidash.Chat.Application.DataModels;
 using Unidash.Chat.Application.DataTransfer;
 using Unidash.Chat.Application.DataTransfer.Partials;
 
-namespace Unidash.Chat.Application.Features.Channels
+namespace Unidash.Chat.Application.Features.Users
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<ChatChannel, ChatChannelResponse>(MemberList.Destination);
-            CreateMap<ChatChannel, ChatChannelPartialResponse>(MemberList.Destination);
+            CreateMap<ChatUser, ChatUserPartialResponse>(MemberList.Destination);
         }
     }
 }

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -40,9 +42,10 @@ namespace Unidash.Gateway
             app.UseRouting();
 
             app.UseCors(builder => builder
-                .AllowAnyOrigin()
+                .WithOrigins(Configuration.GetSection("Gateway:Cors:WithOrigins").Get<string[]>())
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseEndpoints(endpoints =>
             {

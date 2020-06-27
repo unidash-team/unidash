@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Unidash.Chat.Application.DataTransfer;
 using Unidash.Chat.Application.Features.Channels.Requests;
-using Unidash.Chat.Application.Features.Channels.Requests.Responses;
 using Unidash.Chat.Application.Features.Messages.Requests;
 
 namespace Unidash.Chat.Application.Controllers
@@ -40,6 +40,15 @@ namespace Unidash.Chat.Application.Controllers
         public Task<IActionResult> GetChannels() => _mediator.Send(new GetChannelListRequest());
 
         /// <summary>
+        /// Returns a single channel.
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        [HttpGet("{channelId}")]
+        [ProducesResponseType(typeof(IEnumerable<ChatChannelResponse>), StatusCodes.Status200OK)]
+        public Task<IActionResult> GetChannel(string channelId) => _mediator.Send(new GetChannelRequest(channelId));
+
+        /// <summary>
         /// Removes the authenticated participant from the channel.
         /// </summary>
         /// <param name="channelId"></param>
@@ -50,11 +59,16 @@ namespace Unidash.Chat.Application.Controllers
             _mediator.Send(new DeleteCurrentParticipantFromChannelRequest(channelId));
 
         [HttpPost("{channelId}/messages")]
-        public Task<IActionResult> PostMessage(string channelId, [FromBody] string message) => 
-            _mediator.Send(new PostMessageRequest(channelId, message));
+        public Task<IActionResult> PostMessage([FromRoute] string channelId, [FromBody] Test dto) => 
+            _mediator.Send(new PostMessageRequest(channelId, dto.Message));
 
         [HttpGet("{channelId}/messages")]
         public Task<IActionResult> GetMessages(string channelId) => 
             _mediator.Send(new GetMessageListRequest(channelId));
+    }
+
+    public class Test
+    {
+        public string Message { get; set; }
     }
 }

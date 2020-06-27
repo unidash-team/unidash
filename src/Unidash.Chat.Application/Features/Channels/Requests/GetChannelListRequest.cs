@@ -5,7 +5,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Unidash.Chat.Application.DataModels;
-using Unidash.Chat.Application.Features.Channels.Requests.Responses;
+using Unidash.Chat.Application.DataTransfer;
 using Unidash.Core.Infrastructure;
 using Unidash.Core.Utilities;
 

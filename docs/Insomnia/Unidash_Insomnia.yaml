@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-06-26T21:08:42.071Z
+__export_date: 2020-06-27T21:30:50.829Z
 __export_source: insomnia.desktop.app:v2020.2.2
 resources:
   - _id: req_28f5162b30cb4ecb856d2f809001a223
@@ -141,39 +141,6 @@ resources:
     settingStoreCookies: true
     url: "{{ authBaseUrl  }}/users/@me"
     _type: request
-  - _id: req_ba18cd1e16914e498bf0bbf89250ac5a
-    authentication:
-      token: "{{ jwt  }}"
-      type: bearer
-    body: {}
-    created: 1593204668050
-    description: Removes the authenticated participant from the channel.
-    headers: []
-    isPrivate: false
-    metaSortKey: -1593204668050
-    method: DELETE
-    modified: 1593205220740
-    name: /channels/{id}/participants/@me
-    parameters: []
-    parentId: fld_303b55107a1947618e861003025b68b9
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/participants/@me"
-    _type: request
-  - _id: fld_303b55107a1947618e861003025b68b9
-    created: 1593198019756
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1593198019756
-    modified: 1593198019756
-    name: Chat
-    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
-    _type: request_group
   - _id: req_767d1fdf69124797a6feea2dfd0b6985
     authentication:
       token: "{{ jwt  }}"
@@ -182,7 +149,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"Title": "Hello World {% now 'iso-8601', '' %}"
+        	"title": "Hello World {% now 'iso-8601', '' %}"
         }
     created: 1593199246063
     description: |-
@@ -195,7 +162,7 @@ resources:
     isPrivate: false
     metaSortKey: -1593199246063
     method: POST
-    modified: 1593205243212
+    modified: 1593255193859
     name: /channels
     parameters: []
     parentId: fld_303b55107a1947618e861003025b68b9
@@ -207,6 +174,16 @@ resources:
     settingStoreCookies: true
     url: "{{ chatBaseUrl  }}/channels"
     _type: request
+  - _id: fld_303b55107a1947618e861003025b68b9
+    created: 1593198019756
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1593198019756
+    modified: 1593198019756
+    name: Chat
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: request_group
   - _id: req_386fd678fd3648ed82454782d1d5bbd3
     authentication:
       token: "{{ jwt  }}"
@@ -229,6 +206,109 @@ resources:
     settingSendCookies: true
     settingStoreCookies: true
     url: "{{ chatBaseUrl  }}/channels"
+    _type: request
+  - _id: req_be58cb4a8a7244f480867eb99c760ce8
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593292618421
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632953.25
+    method: GET
+    modified: 1593292625358
+    name: /channels/{id}
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}"
+    _type: request
+  - _id: req_8a91f25512ba41c8bcdd1085a70093d4
+    authentication:
+      disabled: false
+      token: "{{ jwt  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"message": "Hi {% now 'iso-8601', '' %}"
+        }
+    created: 1593254926778
+    description: ""
+    headers:
+      - disabled: false
+        id: pair_8bbfda40a1cc4759929f4ce0de483698
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1593198632947
+    method: POST
+    modified: 1593262995938
+    name: /channels/{id}/messages
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/messages"
+    _type: request
+  - _id: req_3264e78ab86e4e4b808ea94cb9053695
+    authentication:
+      disabled: false
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593263274798
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632940.75
+    method: GET
+    modified: 1593263281002
+    name: /channels/{id}/messages
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/messages"
+    _type: request
+  - _id: req_ba18cd1e16914e498bf0bbf89250ac5a
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593204668050
+    description: Removes the authenticated participant from the channel.
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632934.5
+    method: DELETE
+    modified: 1593254932336
+    name: /channels/{id}/participants/@me
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/participants/@me"
     _type: request
   - _id: env_a8ab02fbec199faa2deeef758977681ea6da5688
     color: null

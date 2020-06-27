@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Unidash.Chat.Application.DataModels;
 using Unidash.Chat.Application.Hubs;
+using Unidash.Chat.Application.Services;
 using Unidash.Core.Infrastructure;
 using Unidash.Core.Utilities;
 
@@ -24,31 +25,18 @@ namespace Unidash.Chat.Application.Features.Messages.Requests
 
         public class Handler : IRequestHandler<PostMessageRequest, IActionResult>
         {
-            private readonly ICurrentUserAccessor _userAccessor;
-            private readonly IEntityRepository<ChatMessage> _messageEntityRepository;
-            private readonly IHubContext<ChatHub> _chatHubContext;
+            private readonly IMessageService _messageService;
 
-            public Handler(ICurrentUserAccessor userAccessor,
-                IEntityRepository<ChatMessage> messageEntityRepository,
-                IHubContext<ChatHub> chatHubContext)
+            public Handler(IMessageService messageService)
             {
-                _userAccessor = userAccessor;
-                _messageEntityRepository = messageEntityRepository;
-                _chatHubContext = chatHubContext;
+                _messageService = messageService;
             }
 
             public async Task<IActionResult> Handle(PostMessageRequest request, CancellationToken cancellationToken)
             {
-                var message = new ChatMessage
-                {
-                    Message = request.Message,
-                    ChannelId = request.ChannelId,
-                    UserId = _userAccessor.GetUserId()
-                };
+                await _messageService.SendAsync(request.ChannelId, request.Message);
 
-                await _messageEntityRepository.AddAsync(message);
-
-                return new OkObjectResult(message);
+                return new OkResult();
             }
         }
     }
