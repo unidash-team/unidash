@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Unidash.Auth.Application.Features.Users.Requests;
+using Unidash.Auth.Application.Features.Users.Requests.Responses;
 
 namespace Unidash.Auth.Application.Controllers
 {
@@ -28,6 +29,7 @@ namespace Unidash.Auth.Application.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpGet("@me")]
+        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
         public Task<IActionResult> GetUser() => _mediator.Send(new GetUserRequest());
     }
 }
