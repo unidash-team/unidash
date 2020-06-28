@@ -1,6 +1,7 @@
 # Unidash Architecture
 
 ## Topology
+<a name="topology"></a>
 Unidash is composed of various microservices within a private service mesh. The gateway project powered by [Microsoft YARP](https://github.com/microsoft/reverse-proxy) that consolidates all services into a single entrypoint. 
 
 For the public facing end of the back-end, we employ Traefik as a reverse proxy. Traefik is in charge of HTTPS, metrics, access logs, load balancing, etc.
@@ -27,6 +28,7 @@ For instance, you will spot the repository pattern in some of them, but not nece
 - [CQRS](https://unidash.top/2020/05/25/the-mediator-pattern-and-cqrs/)
 
 ### Mediator Pattern
+<a name="mediator"></a>
 For controller methods, we use the [Mediator Pattern](https://refactoring.guru/design-patterns/mediator) to handle incoming requests. The MediatR NuGet package already provides the building foundation for this pattern. All controller methods should follow this implementation convention:
 
 ```cs
