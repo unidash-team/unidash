@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-06-27T21:30:50.829Z
+__export_date: 2020-06-29T15:49:54.485Z
 __export_source: insomnia.desktop.app:v2020.2.2
 resources:
   - _id: req_28f5162b30cb4ecb856d2f809001a223
@@ -310,6 +310,58 @@ resources:
     settingStoreCookies: true
     url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/participants/@me"
     _type: request
+  - _id: req_92bd8a8e33a94d908ce41d7a69836c25
+    authentication: {}
+    body: {}
+    created: 1593445664881
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593445664881
+    method: GET
+    modified: 1593445691202
+    name: /calendar/@all
+    parameters: []
+    parentId: fld_d6eecfa2d85f45b690dcce1e331fdf08
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ timeTableBaseUrl  }}/calendar/@all"
+    _type: request
+  - _id: fld_d6eecfa2d85f45b690dcce1e331fdf08
+    created: 1593445624334
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1593198019706
+    modified: 1593445713475
+    name: Time Table
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: request_group
+  - _id: req_5d30a069650243d2ade52db6bcae2e70
+    authentication: {}
+    body: {}
+    created: 1593445721311
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593322455472
+    method: GET
+    modified: 1593445769620
+    name: /calendar/{id}
+    parameters: []
+    parentId: fld_d6eecfa2d85f45b690dcce1e331fdf08
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ timeTableBaseUrl  }}/calendar/{{ timeTable.eventId  }}"
+    _type: request
   - _id: env_a8ab02fbec199faa2deeef758977681ea6da5688
     color: null
     created: 1592558398892
@@ -322,6 +374,10 @@ resources:
       chatBaseUrl: "{{ baseUrl  }}/chat"
       jwt: "{% response 'body', 'req_9a23b23104774b6ab3f58a814cd2159e',
         'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'always' %}"
+      timeTable:
+        eventId: "{% response 'body', 'req_92bd8a8e33a94d908ce41d7a69836c25',
+          'b64::JFswXS5pZA==::46b', 'never' %}"
+      timeTableBaseUrl: "{{ baseUrl  }}/timetable"
       userId: "{% response 'body', 'req_60c48dc981014f7aab66c8c415b7666d',
         'b64::JC5pZA==::46b', 'always' %}"
     dataPropertyOrder:
@@ -329,14 +385,18 @@ resources:
         - baseUrl
         - authBaseUrl
         - chatBaseUrl
+        - timeTableBaseUrl
         - jwt
         - userId
         - chat
+        - timeTable
       "&~|chat":
         - channelId
+      "&~|timeTable":
+        - eventId
     isPrivate: false
     metaSortKey: 1592558398892
-    modified: 1593205575965
+    modified: 1593445763263
     name: Base Environment
     parentId: wrk_32e4c88c3131430d90c13421b427c8dc
     _type: environment

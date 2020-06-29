@@ -2,4 +2,4 @@
 - [Architecture](Architecture.md)
 - [Configuration](Configuration.md)
 - [Deployment](Deployment.md)
-- [REST API](REST%20API.md.md)
+- [REST API](REST-API.md.md)
