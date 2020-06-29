@@ -1,4 +1,5 @@
 <center>
+<img src="https://messmerized.sharepoint.com/sites/Unidash/Shared%20Documents/Ressourcen/Logos/logo_ud_glyph_rounded-64.png">
 <h1>Unidash</h1>
 
 [![Build Status](https://dev.azure.com/foodies-inc/Unidash/_apis/build/status/unidash-backend?branchName=dev&stageName=Build&jobName=Build%20Docker%20Images)](https://dev.azure.com/foodies-inc/Unidash/_build/latest?definitionId=2&branchName=dev) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/foodies-inc/unidash/2) ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/foodies-inc/unidash/2)

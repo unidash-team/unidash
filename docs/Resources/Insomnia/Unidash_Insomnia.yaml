@@ -1,0 +1,445 @@
+_type: export
+__export_format: 4
+__export_date: 2020-06-29T15:49:54.485Z
+__export_source: insomnia.desktop.app:v2020.2.2
+resources:
+  - _id: req_28f5162b30cb4ecb856d2f809001a223
+    authentication: {}
+    body: {}
+    created: 1593196264105
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198019856
+    method: GET
+    modified: 1593205692912
+    name: /health
+    parameters: []
+    parentId: fld_00a136cbf93f44ca8dea715950d8a01c
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ baseUrl  }}/health"
+    _type: request
+  - _id: fld_00a136cbf93f44ca8dea715950d8a01c
+    created: 1593198031966
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1593198031966
+    modified: 1593198031966
+    name: Gateway
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: request_group
+  - _id: wrk_32e4c88c3131430d90c13421b427c8dc
+    created: 1592558398710
+    description: ""
+    modified: 1592558398710
+    name: Unidash
+    parentId: null
+    scope: null
+    _type: workspace
+  - _id: req_f7e0727b5bff4c9b8b970b176b66a774
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "gino@messmerized.de",
+        	"firstName": "Gino",
+        	"lastName": "Messmer",
+        	"password": "Test1234!1234"
+        }
+    created: 1592558482489
+    description: ""
+    headers:
+      - id: pair_98df87c2f8504fb0a322625d867e0170
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1593103678161
+    method: POST
+    modified: 1593205415070
+    name: connect/register
+    parameters: []
+    parentId: fld_39d48f58c4e148e5902bdeabd1e81aed
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ authBaseUrl  }}/connect/register"
+    _type: request
+  - _id: fld_39d48f58c4e148e5902bdeabd1e81aed
+    created: 1593196248724
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1593198019806
+    modified: 1593198024632
+    name: Auth
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: request_group
+  - _id: req_9a23b23104774b6ab3f58a814cd2159e
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "gino@messmerized.de",
+        	"password": "Test1234!1234"
+        }
+    created: 1592558542388
+    description: ""
+    headers:
+      - id: pair_98df87c2f8504fb0a322625d867e0170
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1593103678136
+    method: POST
+    modified: 1593205421336
+    name: connect/login
+    parameters: []
+    parentId: fld_39d48f58c4e148e5902bdeabd1e81aed
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ authBaseUrl  }}/connect/login"
+    _type: request
+  - _id: req_60c48dc981014f7aab66c8c415b7666d
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593103701695
+    description: ""
+    headers:
+      - description: ""
+        id: pair_5e81721f07a340c7ac057674b1af82dd
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1593103678111
+    method: GET
+    modified: 1593198045729
+    name: users/@me
+    parameters: []
+    parentId: fld_39d48f58c4e148e5902bdeabd1e81aed
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ authBaseUrl  }}/users/@me"
+    _type: request
+  - _id: req_767d1fdf69124797a6feea2dfd0b6985
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title": "Hello World {% now 'iso-8601', '' %}"
+        }
+    created: 1593199246063
+    description: |-
+      Creates a new chat channel with the participants as specified.
+      > This action automatically adds the authenticated user as a participant.
+    headers:
+      - id: pair_22957d07bdb044dbae35e4e06eb6bcb7
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1593199246063
+    method: POST
+    modified: 1593255193859
+    name: /channels
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels"
+    _type: request
+  - _id: fld_303b55107a1947618e861003025b68b9
+    created: 1593198019756
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1593198019756
+    modified: 1593198019756
+    name: Chat
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: request_group
+  - _id: req_386fd678fd3648ed82454782d1d5bbd3
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593202794720
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632959.5
+    method: GET
+    modified: 1593202800571
+    name: /channels
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels"
+    _type: request
+  - _id: req_be58cb4a8a7244f480867eb99c760ce8
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593292618421
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632953.25
+    method: GET
+    modified: 1593292625358
+    name: /channels/{id}
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}"
+    _type: request
+  - _id: req_8a91f25512ba41c8bcdd1085a70093d4
+    authentication:
+      disabled: false
+      token: "{{ jwt  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"message": "Hi {% now 'iso-8601', '' %}"
+        }
+    created: 1593254926778
+    description: ""
+    headers:
+      - disabled: false
+        id: pair_8bbfda40a1cc4759929f4ce0de483698
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1593198632947
+    method: POST
+    modified: 1593262995938
+    name: /channels/{id}/messages
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/messages"
+    _type: request
+  - _id: req_3264e78ab86e4e4b808ea94cb9053695
+    authentication:
+      disabled: false
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593263274798
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632940.75
+    method: GET
+    modified: 1593263281002
+    name: /channels/{id}/messages
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/messages"
+    _type: request
+  - _id: req_ba18cd1e16914e498bf0bbf89250ac5a
+    authentication:
+      token: "{{ jwt  }}"
+      type: bearer
+    body: {}
+    created: 1593204668050
+    description: Removes the authenticated participant from the channel.
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593198632934.5
+    method: DELETE
+    modified: 1593254932336
+    name: /channels/{id}/participants/@me
+    parameters: []
+    parentId: fld_303b55107a1947618e861003025b68b9
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ chatBaseUrl  }}/channels/{{ chat.channelId  }}/participants/@me"
+    _type: request
+  - _id: req_92bd8a8e33a94d908ce41d7a69836c25
+    authentication: {}
+    body: {}
+    created: 1593445664881
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593445664881
+    method: GET
+    modified: 1593445691202
+    name: /calendar/@all
+    parameters: []
+    parentId: fld_d6eecfa2d85f45b690dcce1e331fdf08
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ timeTableBaseUrl  }}/calendar/@all"
+    _type: request
+  - _id: fld_d6eecfa2d85f45b690dcce1e331fdf08
+    created: 1593445624334
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1593198019706
+    modified: 1593445713475
+    name: Time Table
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: request_group
+  - _id: req_5d30a069650243d2ade52db6bcae2e70
+    authentication: {}
+    body: {}
+    created: 1593445721311
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1593322455472
+    method: GET
+    modified: 1593445769620
+    name: /calendar/{id}
+    parameters: []
+    parentId: fld_d6eecfa2d85f45b690dcce1e331fdf08
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ timeTableBaseUrl  }}/calendar/{{ timeTable.eventId  }}"
+    _type: request
+  - _id: env_a8ab02fbec199faa2deeef758977681ea6da5688
+    color: null
+    created: 1592558398892
+    data:
+      authBaseUrl: "{{ baseUrl  }}/auth"
+      baseUrl: https://localhost
+      chat:
+        channelId: "{% response 'body', 'req_386fd678fd3648ed82454782d1d5bbd3',
+          'b64::JFswXS5pZA==::46b', 'always' %}"
+      chatBaseUrl: "{{ baseUrl  }}/chat"
+      jwt: "{% response 'body', 'req_9a23b23104774b6ab3f58a814cd2159e',
+        'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'always' %}"
+      timeTable:
+        eventId: "{% response 'body', 'req_92bd8a8e33a94d908ce41d7a69836c25',
+          'b64::JFswXS5pZA==::46b', 'never' %}"
+      timeTableBaseUrl: "{{ baseUrl  }}/timetable"
+      userId: "{% response 'body', 'req_60c48dc981014f7aab66c8c415b7666d',
+        'b64::JC5pZA==::46b', 'always' %}"
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+        - authBaseUrl
+        - chatBaseUrl
+        - timeTableBaseUrl
+        - jwt
+        - userId
+        - chat
+        - timeTable
+      "&~|chat":
+        - channelId
+      "&~|timeTable":
+        - eventId
+    isPrivate: false
+    metaSortKey: 1592558398892
+    modified: 1593445763263
+    name: Base Environment
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: environment
+  - _id: jar_a8ab02fbec199faa2deeef758977681ea6da5688
+    cookies: []
+    created: 1592558398898
+    modified: 1592558398898
+    name: Default Jar
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: cookie_jar
+  - _id: spc_3dfd207b5bbd420ba94c1d603770595b
+    contentType: yaml
+    contents: ""
+    created: 1592558398715
+    fileName: Unidash
+    modified: 1592558398715
+    parentId: wrk_32e4c88c3131430d90c13421b427c8dc
+    _type: api_spec
+  - _id: env_701fd2f01a564488b83a384ff056f1a0
+    color: "#fc6703"
+    created: 1593205564598
+    data:
+      baseUrl: https://tinf18b4.dev.unidash.top
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+    isPrivate: false
+    metaSortKey: 1
+    modified: 1593205655861
+    name: TINF18B4 (dev)
+    parentId: env_a8ab02fbec199faa2deeef758977681ea6da5688
+    _type: environment
+  - _id: env_1d2a79b8a3be4d9ab3ebf5f661cf2344
+    color: null
+    created: 1593205622744
+    data:
+      baseUrl: https://localhost
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+    isPrivate: false
+    metaSortKey: 0
+    modified: 1593205649624
+    name: Local
+    parentId: env_a8ab02fbec199faa2deeef758977681ea6da5688
+    _type: environment

@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
+using Microsoft.ReverseProxy.Service;
 
 namespace Unidash.Gateway
 {
@@ -22,8 +23,12 @@ namespace Unidash.Gateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOcelot();
-            services.AddSwaggerForOcelot(Configuration);
+            services.AddReverseProxy()
+                .LoadFromConfig(Configuration.GetSection("ReverseProxy"));
+
+            services.AddCors();
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,15 +41,16 @@ namespace Unidash.Gateway
 
             app.UseRouting();
 
-            app.UseSwaggerForOcelotUI();
-            app.UseOcelot();
+            app.UseCors(builder => builder
+                .WithOrigins(Configuration.GetSection("Gateway:Cors:WithOrigins").Get<string[]>())
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapHealthChecks("/health");
+                endpoints.MapReverseProxy();
             });
         }
     }

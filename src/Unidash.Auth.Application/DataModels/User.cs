@@ -3,7 +3,7 @@ using System;
 
 namespace Unidash.Auth.Application.DataModels
 {
-    public class User : IdentityUser<Guid>
+    public class User : IdentityUser
     {
         public string FirstName { get; set; }
 
