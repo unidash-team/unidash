@@ -12,6 +12,10 @@ services:
         - "traefik.http.routers.gateway-secured.rule=Host(`tinf18b4.dev.unidash.top`)"
         - "traefik.http.routers.gateway-secured.entrypoints=web-secured"
         - "traefik.http.routers.gateway-secured.tls.certresolver=defaultlts"
+        - "traefik.http.middlewares.gateway.headers.accesscontrolallowmethods=OPTIONS,GET,PATCH,PUT,DELETE"
+        - "traefik.http.middlewares.gateway.headers.accesscontrolalloworiginlist=*"
+        - "traefik.http.middlewares.gateway.headers.accesscontrolmaxage=100"
+        - "traefik.http.middlewares.gateway.headers.addvaryheader=true"
 
   auth:
     networks:

@@ -9,8 +9,8 @@
 ## Deploy with Docker Stack
 The first step is to customize your Docker compose file. Download these files and adjust them to fit your needs.
 - Base file: [docker-compose.yml](../src/docker-compose.yml)
-- Treafik file: [docker-compose.yml](../src/docker-compose.traefik.yml)
-- Environment file: [docker-compose.yml](../src/docker-compose.dev.yml)
+- Treafik file: [docker-compos.traefik.yml](../src/docker-compose.traefik.yml)
+- Environment file: [docker-compose.dev.yml](../src/docker-compose.dev.yml)
 
 Please note that you will need to alter some variables (`${...:-default}`) to fit your needs. Refer [here](Configuration.md) for further info about configuration.
 
